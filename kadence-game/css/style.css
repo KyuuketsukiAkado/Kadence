@@ -157,14 +157,12 @@ html, body {
 
 /* Title: Space Grotesk Medium 74px #FFFFFF, X=853 Y=84 */
 .pause-title {
-  position: absolute;
-  top: 84px;
-  left: 853px;
   font-family: var(--font-display);
   font-weight: 500;
   font-size: 74px;
   color: #FFFFFF;
   white-space: nowrap;
+  margin-bottom: 40px;
 }
 
 /* Button container: vertical, gap 24px */
@@ -599,12 +597,15 @@ html, body {
    GAME SCREEN — #5 no client note, #6 sprite right, #15 no darken
    ============================================================ */
 #game-screen { position: relative; }
-#game-screen .bg-layer { background-image: url('../assets/art/background_clean.png'); }
+#game-screen .bg-layer { background-image: url('../assets/art/background_clean.png'); background-position: center bottom; }
 
 /* #2: Sprite bigger, closer to counter */
 .character-sprite {
   position: absolute; bottom: 0; right: 22%;
-  height: 105%; max-height: 864px; z-index: 3;
+  height: 85vh;
+  min-height: 700px;
+  max-height: 1200px;
+  z-index: 3;
   object-fit: contain;
   filter: drop-shadow(0 4px 20px rgba(0,0,0,0.5));
   transition: opacity 0.3s ease;
@@ -636,7 +637,7 @@ html, body {
 .dialogue-box {
   background: rgba(10,10,10,0.85); backdrop-filter: blur(16px);
   border: none; border-top: 2px solid rgba(255,255,255,0.2); border-radius: 0;
-  padding: 32px 10%; min-height: 180px; box-sizing: border-box; cursor: pointer;
+  padding: 32px 10%; height: 220px; box-sizing: border-box; cursor: pointer;
 }
 .dialogue-speaker {
   font-family: var(--font-display); font-weight: 600; font-size: calc(18px + 0.3vw);
