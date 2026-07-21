@@ -73,7 +73,10 @@ class Game {
 
     // Pause buttons
     document.getElementById('pause-btn').addEventListener('click', (e) => { e.stopPropagation(); this.showPause(); });
-    document.getElementById('workshop-pause-btn').addEventListener('click', (e) => { e.stopPropagation(); this.showPause(); });
+    const wsPauseBtn = document.getElementById('workshop-pause-btn');
+    if (wsPauseBtn) {
+      wsPauseBtn.addEventListener('click', (e) => { e.stopPropagation(); this.showPause(); });
+    }
 
     // Sound toggle button (main menu)
     document.getElementById('sound-toggle').addEventListener('click', (e) => {
@@ -294,6 +297,9 @@ class Game {
     const budgetStep = step - afterIntroAndChoices;
     const budgetLines = dialogue.budgetReveal[lang];
     if (budgetStep < budgetLines.length) {
+      if (budgetStep === 0 && dialogue.budgetReveal.reveal) {
+        this.applyReveal(dialogue.budgetReveal.reveal);
+      }
       const line = budgetLines[budgetStep];
       if (line.reveal) this.applyReveal(line.reveal);
       this.showDialogueLine(line);
@@ -574,7 +580,7 @@ class Game {
     // Map bike category to store filter category
     const catToFilter = { frame: 'frames', drivetrain: 'drivetrain', brakes: 'drivetrain', wheels: 'wheels', saddle: 'accessories' };
     const filterCat = catToFilter[category] || null;
-    this.openStore(filterCat);
+    this.openStore(filterCat, category);
   }
 
   _closeShop() {
@@ -656,9 +662,10 @@ class Game {
   // ============================================================
   // BIKESUPPLY STORE — Full e-commerce with filters
   // ============================================================
-  openStore(preselectedCategory) {
+  openStore(preselectedCategory, subCategory) {
     this._storeFilters = {
       category: preselectedCategory ? [preselectedCategory] : [],
+      subCategory: subCategory || null,
       priceMax: 500,
       stats: [],
       brands: [],
@@ -667,6 +674,15 @@ class Game {
     this._storePage = 1;
     this._storePerPage = 6;
     this._storeSort = 'featured';
+
+    // Reset DOM elements of the store
+    document.querySelectorAll('.store-filters input[type="checkbox"]').forEach(cb => cb.checked = false);
+    const searchInput = document.getElementById('store-search');
+    if (searchInput) searchInput.value = '';
+    const priceSlider = document.getElementById('filter-price-slider');
+    if (priceSlider) priceSlider.value = 500;
+    const priceMaxLabel = document.getElementById('filter-price-max');
+    if (priceMaxLabel) priceMaxLabel.textContent = '500';
 
     this.showScreen('store-screen');
     this._renderStore();
@@ -696,6 +712,7 @@ class Game {
     document.querySelectorAll('[data-cat-filter]').forEach(cb => {
       if (preselectedCategory && cb.dataset.catFilter === preselectedCategory) cb.checked = true;
       cb.onchange = () => {
+        this._storeFilters.subCategory = null;
         this._storeFilters.category = [...document.querySelectorAll('[data-cat-filter]:checked')].map(c => c.dataset.catFilter);
         this._storePage = 1;
         this._renderStore();
@@ -722,7 +739,7 @@ class Game {
       document.querySelectorAll('.store-filters input[type="checkbox"]').forEach(cb => cb.checked = false);
       document.getElementById('filter-price-slider').value = 500;
       document.getElementById('filter-price-max').textContent = '500';
-      this._storeFilters = { category: [], priceMax: 500, stats: [], brands: [], search: '' };
+      this._storeFilters = { category: [], subCategory: null, priceMax: 500, stats: [], brands: [], search: '' };
       this._storePage = 1;
       this._renderStore();
     };
@@ -783,6 +800,10 @@ class Game {
         const mapped = catMap[item.category] || item.category;
         return f.category.includes(mapped);
       });
+    }
+    // Sub-category filter (e.g. brakes vs drivetrain) when clicking specifically from workshop labels
+    if (f.subCategory) {
+      items = items.filter(item => item.category === f.subCategory);
     }
     // Price filter
     items = items.filter(item => item.cost <= f.priceMax);
