@@ -601,8 +601,8 @@ html, body {
 
 /* #2: Sprite bigger, closer to counter */
 .character-sprite {
-  position: absolute; bottom: 0; right: 32%;
-  height: 110%; max-height: 936px; z-index: 3;
+  position: absolute; bottom: 0; right: 22%;
+  height: 105%; max-height: 864px; z-index: 3;
   object-fit: contain;
   filter: drop-shadow(0 4px 20px rgba(0,0,0,0.5));
   transition: opacity 0.3s ease;
@@ -629,15 +629,15 @@ html, body {
 
 /* Dialogue box */
 .dialogue-container {
-  position: absolute; bottom: 30px; left: 5%; width: 60%; z-index: 10;
+  position: absolute; bottom: 0; left: 0; width: 100%; z-index: 10;
 }
 .dialogue-box {
-  background: rgba(0,0,0,0.7); backdrop-filter: blur(16px);
-  border: 1px solid rgba(255,255,255,0.3); border-radius: var(--radius-md);
-  padding: 24px 32px; min-height: 120px; cursor: pointer;
+  background: rgba(10,10,10,0.85); backdrop-filter: blur(16px);
+  border: none; border-top: 2px solid rgba(255,255,255,0.2); border-radius: 0;
+  padding: 32px 10%; min-height: 180px; box-sizing: border-box; cursor: pointer;
 }
 .dialogue-speaker {
-  font-family: var(--font-display); font-weight: 600; font-size: 18px;
+  font-family: var(--font-display); font-weight: 600; font-size: calc(18px + 0.3vw);
   margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;
 }
 .dialogue-speaker.narrator { color: var(--text-muted); font-style: italic; text-transform: none; }
@@ -649,11 +649,11 @@ html, body {
 .dialogue-speaker.ewa { color: #DDA0DD; }
 .dialogue-speaker.syalyanych { color: #D2B48C; }
 .dialogue-text {
-  font-family: var(--font-body); font-weight: 400; font-size: 22px;
-  line-height: 34px; color: var(--text-primary);
+  font-family: var(--font-body); font-weight: 400; font-size: calc(20px + 0.4vw);
+  line-height: 1.6; color: var(--text-primary);
 }
 .dialogue-continue {
-  font-family: var(--font-body); font-weight: 400; font-size: 14px;
+  font-family: var(--font-body); font-weight: 400; font-size: calc(12px + 0.1vw);
   color: var(--text-muted); text-align: right; margin-top: 10px;
   animation: blink 1.5s infinite;
 }
@@ -1153,6 +1153,18 @@ html, body {
 .end-stat-row { display: flex; justify-content: space-between; font-family: var(--font-body); font-size: 22px; }
 .end-stat-label { color: var(--text-secondary); }
 .end-stat-value { font-weight: 700; color: var(--accent-yellow); }
+.end-goodbye {
+  margin-top: 30px;
+  padding: 20px;
+  background: rgba(0, 147, 126, 0.1);
+  border-left: 4px solid var(--accent-cyan);
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-primary);
+  text-align: left;
+}
 
 /* ============================================================
    SUBMIT POPUP — Pixel-perfect Figma handoff

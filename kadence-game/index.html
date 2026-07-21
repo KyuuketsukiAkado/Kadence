@@ -221,25 +221,74 @@
           <div class="ws-bike-visual">
             <!-- Bike placeholder SVG -->
             <svg class="ws-bike-svg" viewBox="0 0 600 400" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <!-- Rear wheel -->
-              <circle cx="150" cy="280" r="80" stroke="#333333" stroke-width="6" fill="none"/>
-              <circle cx="150" cy="280" r="8" fill="#555555"/>
-              <!-- Front wheel -->
-              <circle cx="450" cy="280" r="80" stroke="#333333" stroke-width="6" fill="none"/>
-              <circle cx="450" cy="280" r="8" fill="#555555"/>
-              <!-- Frame -->
-              <line x1="150" y1="280" x2="300" y2="160" stroke="#333333" stroke-width="7"/>
-              <line x1="300" y1="160" x2="450" y2="280" stroke="#333333" stroke-width="7"/>
-              <line x1="300" y1="160" x2="300" y2="100" stroke="#333333" stroke-width="7"/>
-              <line x1="150" y1="280" x2="300" y2="280" stroke="#333333" stroke-width="5"/>
-              <!-- Seat -->
-              <rect x="280" y="88" width="40" height="12" rx="4" fill="#333333"/>
-              <!-- Handlebars -->
-              <line x1="300" y1="100" x2="420" y2="120" stroke="#333333" stroke-width="5"/>
-              <line x1="410" y1="110" x2="430" y2="130" stroke="#333333" stroke-width="5"/>
-              <!-- Drivetrain -->
-              <circle cx="220" cy="280" r="20" stroke="#333333" stroke-width="4" fill="none"/>
-              <circle cx="220" cy="280" r="6" fill="#555555"/>
+              <!-- Rear Wheel -->
+              <!-- Outer tire -->
+              <circle cx="150" cy="280" r="85" stroke="#1A1818" stroke-width="12" fill="none"/>
+              <!-- Inner rim -->
+              <circle cx="150" cy="280" r="75" stroke="#888888" stroke-width="4" fill="none"/>
+              <!-- Spokes -->
+              <line x1="150" y1="280" x2="150" y2="195" stroke="#CCCCCC" stroke-width="1.5"/>
+              <line x1="150" y1="280" x2="150" y2="365" stroke="#CCCCCC" stroke-width="1.5"/>
+              <line x1="150" y1="280" x2="65" y2="280" stroke="#CCCCCC" stroke-width="1.5"/>
+              <line x1="150" y1="280" x2="235" y2="280" stroke="#CCCCCC" stroke-width="1.5"/>
+              <line x1="150" y1="280" x2="90" y2="220" stroke="#CCCCCC" stroke-width="1.5"/>
+              <line x1="150" y1="280" x2="210" y2="340" stroke="#CCCCCC" stroke-width="1.5"/>
+              <line x1="150" y1="280" x2="210" y2="220" stroke="#CCCCCC" stroke-width="1.5"/>
+              <line x1="150" y1="280" x2="90" y2="340" stroke="#CCCCCC" stroke-width="1.5"/>
+              <circle cx="150" cy="280" r="10" fill="#555555" stroke="#1A1818" stroke-width="2"/>
+
+              <!-- Front Wheel -->
+              <!-- Outer tire -->
+              <circle cx="450" cy="280" r="85" stroke="#1A1818" stroke-width="12" fill="none"/>
+              <!-- Inner rim -->
+              <circle cx="450" cy="280" r="75" stroke="#888888" stroke-width="4" fill="none"/>
+              <!-- Spokes -->
+              <line x1="450" y1="280" x2="450" y2="195" stroke="#CCCCCC" stroke-width="1.5"/>
+              <line x1="450" y1="280" x2="450" y2="365" stroke="#CCCCCC" stroke-width="1.5"/>
+              <line x1="450" y1="280" x2="365" y2="280" stroke="#CCCCCC" stroke-width="1.5"/>
+              <line x1="450" y1="280" x2="535" y2="280" stroke="#CCCCCC" stroke-width="1.5"/>
+              <line x1="450" y1="280" x2="390" y2="220" stroke="#CCCCCC" stroke-width="1.5"/>
+              <line x1="450" y1="280" x2="510" y2="340" stroke="#CCCCCC" stroke-width="1.5"/>
+              <line x1="450" y1="280" x2="510" y2="220" stroke="#CCCCCC" stroke-width="1.5"/>
+              <line x1="450" y1="280" x2="390" y2="340" stroke="#CCCCCC" stroke-width="1.5"/>
+              <circle cx="450" cy="280" r="10" fill="#555555" stroke="#1A1818" stroke-width="2"/>
+
+              <!-- Frame Elements (Cozy Emerald/Teal Theme #00937E) -->
+              <!-- Chainstay -->
+              <line x1="150" y1="280" x2="280" y2="280" stroke="#00937E" stroke-width="8" stroke-linecap="round"/>
+              <!-- Seatstay -->
+              <line x1="150" y1="280" x2="280" y2="160" stroke="#00937E" stroke-width="8" stroke-linecap="round"/>
+              <!-- Seat Tube -->
+              <line x1="280" y1="280" x2="280" y2="160" stroke="#00937E" stroke-width="10" stroke-linecap="round"/>
+              <!-- Down Tube -->
+              <line x1="280" y1="280" x2="420" y2="160" stroke="#00937E" stroke-width="12" stroke-linecap="round"/>
+              <!-- Top Tube -->
+              <line x1="280" y1="160" x2="420" y2="160" stroke="#00937E" stroke-width="10" stroke-linecap="round"/>
+              <!-- Front Fork -->
+              <line x1="420" y1="160" x2="450" y2="280" stroke="#555555" stroke-width="8" stroke-linecap="round"/>
+
+              <!-- Seatpost & Saddle -->
+              <!-- Seatpost -->
+              <line x1="280" y1="160" x2="280" y2="115" stroke="#888888" stroke-width="6" stroke-linecap="round"/>
+              <!-- Retro Leather Saddle -->
+              <path d="M260,115 C270,105 300,105 305,115 C305,120 290,120 260,115 Z" fill="#8B4513" stroke="#5C2E0B" stroke-width="2"/>
+
+              <!-- Handlebars & Stem -->
+              <!-- Stem -->
+              <line x1="420" y1="160" x2="420" y2="115" stroke="#888888" stroke-width="6" stroke-linecap="round"/>
+              <!-- Sleek Handlebars -->
+              <path d="M395,115 L430,115 C442,115 448,125 442,135" fill="none" stroke="#252424" stroke-width="6" stroke-linecap="round"/>
+
+              <!-- Drivetrain (Chainring, Chain & Crankset) -->
+              <!-- Chain (Top & Bottom runs) -->
+              <line x1="150" y1="272" x2="280" y2="265" stroke="#555555" stroke-width="3"/>
+              <line x1="150" y1="288" x2="280" y2="295" stroke="#555555" stroke-width="3"/>
+              <!-- Chainring -->
+              <circle cx="280" cy="280" r="22" stroke="#333333" stroke-width="4" fill="#777777"/>
+              <circle cx="280" cy="280" r="6" fill="#555555"/>
+              <!-- Crank Arm & Pedal -->
+              <line x1="280" y1="280" x2="280" y2="325" stroke="#888888" stroke-width="5" stroke-linecap="round"/>
+              <rect x="265" y="322" width="30" height="8" rx="2" fill="#1A1818"/>
             </svg>
 
             <!-- Interactive labels with lines -->

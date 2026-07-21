@@ -540,7 +540,8 @@ class Game {
       const itemId = this.state.builtBike[cat];
       if (itemId) {
         const item = ALL_ITEMS.find(i => i.id === itemId);
-        el.textContent = item ? `[${item.name}]` : '[Select part]';
+        const name = (this.state.lang === 'ru' && item && item.nameRu) ? item.nameRu : (item ? item.name : '');
+        el.textContent = item ? `[${name}]` : '[Select part]';
       } else {
         el.textContent = '[Select part]';
       }
@@ -619,6 +620,7 @@ class Game {
     items.forEach(item => {
       const isEquipped = this.state.builtBike[category] === item.id;
       const brand = brandMap[item.name] || 'GENERIC';
+      const displayName = (this.state.lang === 'ru' && item.nameRu) ? item.nameRu : item.name;
 
       const statsHtml = ['speed', 'comfort', 'durability', 'style'].map(s => {
         const v = item[s]; const cls = v > 0 ? 'positive' : v < 0 ? 'negative' : 'zero';
@@ -629,7 +631,7 @@ class Game {
       card.className = 'ws-shop-item' + (isEquipped ? ' equipped' : '');
       card.innerHTML = `
         <div class="ws-shop-item-brand">${brand}</div>
-        <div class="ws-shop-item-name">${item.name}</div>
+        <div class="ws-shop-item-name">${displayName}</div>
         <div class="ws-shop-item-desc">${item.desc[this.state.lang]}</div>
         <div class="ws-shop-item-bottom">
           <div class="ws-shop-item-stats">${statsHtml}</div>
@@ -812,7 +814,12 @@ class Game {
     items = items.filter(item => item.cost <= f.priceMax);
     // Search
     if (f.search) {
-      items = items.filter(item => item.name.toLowerCase().includes(f.search) || item.desc.en.toLowerCase().includes(f.search));
+      items = items.filter(item => 
+        item.name.toLowerCase().includes(f.search) || 
+        (item.nameRu && item.nameRu.toLowerCase().includes(f.search)) || 
+        item.desc.en.toLowerCase().includes(f.search) || 
+        (item.desc.ru && item.desc.ru.toLowerCase().includes(f.search))
+      );
     }
     // Stat filter
     if (f.stats.length > 0) {
@@ -870,6 +877,7 @@ class Game {
       const brand = brandMap[item.name] || 'GENERIC';
       const isEquipped = Object.values(this.state.builtBike).includes(item.id);
       const tags = item.tags.slice(0, 2);
+      const displayName = (this.state.lang === 'ru' && item.nameRu) ? item.nameRu : item.name;
 
       const card = document.createElement('div');
       card.className = 'store-card';
@@ -881,7 +889,7 @@ class Game {
         </div>
         <div class="store-card-body">
           <div class="store-card-tags">${tags.map(t => `<span class="store-card-tag">${t}</span>`).join('')}</div>
-          <div class="store-card-name">${item.name}</div>
+          <div class="store-card-name">${displayName}</div>
           <div class="store-card-desc">${item.desc[this.state.lang]}</div>
           <div class="store-card-bottom">
             <span class="store-card-price">$${item.cost}.00</span>
@@ -1082,11 +1090,16 @@ class Game {
     const h = Math.floor(this.state.playtimeSeconds / 3600);
     const m = Math.floor((this.state.playtimeSeconds % 3600) / 60);
 
+    const goodbyeText = lang === 'ru' ? 
+      `<div class="end-goodbye">🐾 Огромное спасибо за то, что сыграли в прототип Kadence! Эш передает, что ты чертовски хороший механик, а колени наших любимых клиентов спасены от боли раз и навсегда. Крути педали навстречу солнцу, не забывай про шлем, береги свои суставы и до встречи на новых велодорожках! — Команда Ханны и LemiTZ 🚲❤️</div>` :
+      `<div class="end-goodbye">🐾 Thank you so much for playing the Kadence demo! Ash says you're an incredibly fine mechanic, and our clients' knees are forever grateful. Keep pedaling towards the sun, remember to wear a helmet, take care of your joints, and see you on the trails! — Hanna & LemiTZ 🚲❤️</div>`;
+
     statsDiv.innerHTML = `
       <div class="end-stat-row"><span class="end-stat-label">Clients Served</span><span class="end-stat-value">${this.state.clientsServed} / ${CLIENTS.length}</span></div>
       <div class="end-stat-row"><span class="end-stat-label">Average Rating</span><span class="end-stat-value">⭐ ${avgRating}</span></div>
       <div class="end-stat-row"><span class="end-stat-label">Total Earnings</span><span class="end-stat-value">$${this.state.bank}</span></div>
       <div class="end-stat-row"><span class="end-stat-label">Playtime</span><span class="end-stat-value">${String(h).padStart(2,'0')}h ${String(m).padStart(2,'0')}m</span></div>
+      ${goodbyeText}
     `;
   }
 
