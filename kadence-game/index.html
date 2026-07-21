@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kadence — Bicycle Workshop Simulator</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/png" href="assets/art/kadence_logo.png">
+</head>
+<body>
+  <div id="game-container">
+
+    <!-- MAIN MENU — Pixel-perfect handoff -->
+    <div id="main-menu" class="screen active">
+      <div class="bg-layer"></div>
+      <div class="menu-content">
+        <div class="menu-title">KADENCE</div>
+        <button class="menu-btn hidden" data-action="continue" id="continue-btn">Continue</button>
+        <button class="menu-btn" data-action="new-game">New Game</button>
+        <button class="menu-btn" data-action="load-game">Load Game</button>
+        <button class="menu-btn" data-action="settings">Settings</button>
+        <button class="menu-btn" data-action="about-us">About Us</button>
+      </div>
+      <button class="sound-toggle" id="sound-toggle" title="Toggle Sound">
+        <img src="assets/ui/volume_on.png" alt="Sound On" id="sound-icon" class="sound-icon">
+      </button>
+      <div class="version-tag">Version 0.1 Demo</div>
+    </div>
+
+    <!-- SETTINGS — Pixel-perfect Figma handoff -->
+    <div id="settings-screen" class="screen">
+      <div class="bg-layer" style="background:var(--bg-dark);"></div>
+      <div class="lg-blur-backdrop"></div>
+      <div class="lg-container">
+        <!-- Back button: same as Load/Save -->
+        <button class="lg-back-btn" data-action="settings-back" title="Back">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <!-- Title -->
+        <div class="lg-title">Settings</div>
+
+        <!-- Settings content -->
+        <div class="st-content">
+
+          <!-- AUDIO -->
+          <div class="st-section">
+            <div class="st-section-header">Audio</div>
+            <div class="st-row">
+              <span class="st-label">Music Volume</span>
+              <div class="st-slider-group">
+                <div class="st-slider-track">
+                  <input type="range" class="st-slider" id="music-volume" min="0" max="100" value="38">
+                </div>
+                <span class="st-slider-val" id="music-volume-val">38%</span>
+              </div>
+            </div>
+            <div class="st-row">
+              <span class="st-label">SFX Volume</span>
+              <div class="st-slider-group">
+                <div class="st-slider-track">
+                  <input type="range" class="st-slider" id="sfx-volume" min="0" max="100" value="64">
+                </div>
+                <span class="st-slider-val" id="sfx-volume-val">64%</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- DISPLAY -->
+          <div class="st-section">
+            <div class="st-section-header">Display</div>
+            <div class="st-row">
+              <span class="st-label">Window Mode</span>
+              <div class="st-select-wrap">
+                <select class="st-select" id="window-mode">
+                  <option value="fullscreen" selected>Fullscreen</option>
+                  <option value="windowed">Windowed</option>
+                </select>
+                <svg class="st-select-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 9L12 15L18 9" stroke="#252424" stroke-width="2" stroke-linecap="round"/></svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- ACCESSIBILITY -->
+          <div class="st-section">
+            <div class="st-section-header">Accessibility</div>
+            <div class="st-row">
+              <span class="st-label">Text Speed</span>
+              <div class="st-select-wrap">
+                <select class="st-select" id="text-speed">
+                  <option value="slow">Slow</option>
+                  <option value="default" selected>Default</option>
+                  <option value="fast">Fast</option>
+                  <option value="instant">Instant</option>
+                </select>
+                <svg class="st-select-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 9L12 15L18 9" stroke="#252424" stroke-width="2" stroke-linecap="round"/></svg>
+              </div>
+            </div>
+            <div class="st-row">
+              <span class="st-label">Language / Язык</span>
+              <div class="st-select-wrap">
+                <select class="st-select" id="language-select">
+                  <option value="en">English</option>
+                  <option value="ru">Русский</option>
+                </select>
+                <svg class="st-select-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 9L12 15L18 9" stroke="#252424" stroke-width="2" stroke-linecap="round"/></svg>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ABOUT US — Pixel-perfect Figma handoff -->
+    <div id="about-screen" class="screen">
+      <div class="bg-layer" style="background:var(--bg-dark);"></div>
+      <div class="about-blur-backdrop"></div>
+      <div class="about-container">
+        <button class="about-back-btn" data-action="about-back" title="Back">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+
+        <div class="about-title">About us</div>
+
+        <div class="about-body">
+          <p class="about-intro">Welcome to the Kadence Garage!</p>
+          <p class="about-intro">What started as a solo attempt to "fix terrible bike-shop websites" quickly shifted gears into a full-blown indie game. We are a small, passion-driven team of three, trying to build a cozy simulator where empathy and bike geometry matter more than carbon fiber and marketing.</p>
+          <p class="about-intro">Thank you for playing our demo. Please don't put 160mm rotors on a heavy E-bike. Your knees will thank you.</p>
+          <p class="about-intro about-crew-header">The Crew:</p>
+
+          <div class="about-crew-list">
+            <p class="about-crew-member">
+              <strong>Hanna Muzyka aka repro4chful</strong> — Art Director, UX/UI & Product Owner
+              <span class="about-crew-desc">(Drew every single pixel and dog you see here).</span>
+            </p>
+            <p class="about-crew-member">
+              <strong>LemiTZ</strong> — Co-Scriptwriter, Lead English Localizator
+              <span class="about-crew-desc">(The voice behind the quirky customers and Ash's sarcasm).</span>
+            </p>
+          </div>
+
+          <p class="about-devlog">
+            Follow our devlog: <strong>t.me/Kadence_Devlog</strong>
+          </p>
+        </div>
+
+        <div class="about-version">Version 0.1 Demo</div>
+      </div>
+    </div>
+
+    <!-- LOAD GAME — Pixel-perfect Figma handoff -->
+    <div id="load-screen" class="screen">
+      <div class="bg-layer" style="background:var(--bg-dark);"></div>
+      <div class="lg-blur-backdrop"></div>
+      <div class="lg-container">
+        <!-- Back button: 40x40, X=100 Y=105 -->
+        <button class="lg-back-btn" data-action="load-back" title="Back">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <!-- Title: Space Grotesk Medium 74px, X=799 Y=84 -->
+        <div class="lg-title">Load Game</div>
+        <!-- Save slots -->
+        <div class="lg-slots" id="load-slots"></div>
+      </div>
+    </div>
+
+    <!-- SAVE GAME — Same layout as Load Game, different texts -->
+    <div id="save-screen" class="screen">
+      <div class="bg-layer" style="background:var(--bg-dark);"></div>
+      <div class="lg-blur-backdrop"></div>
+      <div class="lg-container">
+        <button class="lg-back-btn" data-action="save-back" title="Back">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="lg-title">Save Game</div>
+        <div class="lg-slots" id="save-slots"></div>
+      </div>
+    </div>
+
+    <!-- GAME SCREEN (Dialogue) — #5 no client note, #6 sprite right, #15 no darken -->
+    <div id="game-screen" class="screen">
+      <div class="bg-layer"></div>
+      <img id="character-sprite" class="character-sprite" src="" alt="">
+      <!-- #14: Top bar with pause in separate area -->
+      <div class="game-top-bar">
+        <div class="info-chip" id="info-day-chip">Day: <span id="info-day">1</span></div>
+        <div class="info-chip">💰 $<span id="info-bank">0</span></div>
+        <div class="info-chip">⭐ <span id="info-rating">0.0</span></div>
+        <button class="pause-trigger" id="pause-btn">⏸</button>
+      </div>
+      <div id="dialogue-container" class="dialogue-container">
+        <div class="dialogue-box" id="dialogue-box">
+          <div id="dialogue-speaker" class="dialogue-speaker"></div>
+          <div id="dialogue-text" class="dialogue-text"></div>
+          <div id="dialogue-continue" class="dialogue-continue">▼ Click to continue</div>
+        </div>
+      </div>
+      <div id="choices-container" class="choices-container hidden"></div>
+    </div>
+
+    <!-- WORKSHOP / BIKE CUSTOMIZATION — Pixel-perfect Figma handoff -->
+    <div id="workshop-screen" class="screen">
+      <div class="ws-overlay">
+
+        <!-- Top controls -->
+        <button class="ws-top-btn ws-back-btn" id="ws-back-btn" title="Back">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="#1A1818" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+
+        <div class="ws-top-right">
+          <div class="ws-balance">Balance: <span class="ws-balance-val" id="ws-balance-val">$0.00</span></div>
+          <button class="ws-top-btn ws-close-btn" id="ws-close-btn" title="Close">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6L18 18" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+
+        <!-- Left: Bike Card -->
+        <div class="ws-bike-card">
+          <div class="ws-bike-visual">
+            <!-- Bike placeholder SVG -->
+            <svg class="ws-bike-svg" viewBox="0 0 600 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Rear wheel -->
+              <circle cx="150" cy="280" r="80" stroke="#E0E0E0" stroke-width="4" fill="none"/>
+              <circle cx="150" cy="280" r="8" fill="#CCC"/>
+              <!-- Front wheel -->
+              <circle cx="450" cy="280" r="80" stroke="#E0E0E0" stroke-width="4" fill="none"/>
+              <circle cx="450" cy="280" r="8" fill="#CCC"/>
+              <!-- Frame -->
+              <line x1="150" y1="280" x2="300" y2="160" stroke="#E0E0E0" stroke-width="5"/>
+              <line x1="300" y1="160" x2="450" y2="280" stroke="#E0E0E0" stroke-width="5"/>
+              <line x1="300" y1="160" x2="300" y2="100" stroke="#E0E0E0" stroke-width="5"/>
+              <line x1="150" y1="280" x2="300" y2="280" stroke="#E0E0E0" stroke-width="4"/>
+              <!-- Seat -->
+              <rect x="280" y="88" width="40" height="12" rx="4" fill="#E0E0E0"/>
+              <!-- Handlebars -->
+              <line x1="300" y1="100" x2="420" y2="120" stroke="#E0E0E0" stroke-width="4"/>
+              <line x1="410" y1="110" x2="430" y2="130" stroke="#E0E0E0" stroke-width="4"/>
+              <!-- Drivetrain -->
+              <circle cx="220" cy="280" r="20" stroke="#E0E0E0" stroke-width="3" fill="none"/>
+              <circle cx="220" cy="280" r="6" fill="#CCC"/>
+            </svg>
+
+            <!-- Interactive labels with lines -->
+            <div class="ws-label ws-label-frame" data-category="frame">
+              <div class="ws-label-line"></div>
+              <div class="ws-label-text"><span class="ws-label-cat">Frame</span> <span class="ws-label-part" id="ws-part-frame">[Select part]</span></div>
+            </div>
+            <div class="ws-label ws-label-drivetrain" data-category="drivetrain">
+              <div class="ws-label-line"></div>
+              <div class="ws-label-text"><span class="ws-label-cat">Drivetrain</span> <span class="ws-label-part" id="ws-part-drivetrain">[Select part]</span></div>
+            </div>
+            <div class="ws-label ws-label-brakes" data-category="brakes">
+              <div class="ws-label-line"></div>
+              <div class="ws-label-text"><span class="ws-label-cat">Brakes</span> <span class="ws-label-part" id="ws-part-brakes">[Select part]</span></div>
+            </div>
+            <div class="ws-label ws-label-wheels" data-category="wheels">
+              <div class="ws-label-line"></div>
+              <div class="ws-label-text"><span class="ws-label-cat">Wheels & Tires</span> <span class="ws-label-part" id="ws-part-wheels">[Select part]</span></div>
+            </div>
+            <div class="ws-label ws-label-saddle" data-category="saddle">
+              <div class="ws-label-line"></div>
+              <div class="ws-label-text"><span class="ws-label-cat">Saddle</span> <span class="ws-label-part" id="ws-part-saddle">[Select part]</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Stats & Checkout -->
+        <div class="ws-stats-col">
+          <div class="ws-stats-title">Stats</div>
+
+          <div class="ws-stat-row">
+            <div class="ws-stat-bar-track">
+              <div class="ws-stat-bar-fill" id="ws-bar-speed" style="background:#FFE44A;width:0%;"></div>
+            </div>
+            <span class="ws-stat-label">Speed</span>
+          </div>
+          <div class="ws-stat-row">
+            <div class="ws-stat-bar-track">
+              <div class="ws-stat-bar-fill" id="ws-bar-comfort" style="background:#3AFF5E;width:0%;"></div>
+            </div>
+            <span class="ws-stat-label">Comfort</span>
+          </div>
+          <div class="ws-stat-row">
+            <div class="ws-stat-bar-track">
+              <div class="ws-stat-bar-fill" id="ws-bar-durability" style="background:#5B8CE6;width:0%;"></div>
+            </div>
+            <span class="ws-stat-label">Durability</span>
+          </div>
+          <div class="ws-stat-row">
+            <div class="ws-stat-bar-track">
+              <div class="ws-stat-bar-fill" id="ws-bar-style" style="background:#C14FD8;width:0%;"></div>
+            </div>
+            <span class="ws-stat-label">Style</span>
+          </div>
+
+          <div class="ws-total-cost">Total cost: <span id="ws-total-cost-val">$0.00</span></div>
+
+          <button class="ws-order-btn" id="deliver-btn" disabled>ORDER NOW</button>
+        </div>
+      </div>
+
+      <!-- Shop overlay (slides in when clicking a part) -->
+      <div class="ws-shop-overlay hidden" id="ws-shop-overlay">
+        <div class="ws-shop-panel">
+          <div class="ws-shop-header">
+            <div class="ws-shop-title" id="ws-shop-title">Parts</div>
+            <button class="ws-shop-close" id="ws-shop-close">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6L18 18" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+          <div class="ws-shop-list" id="ws-shop-list"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESULT SCREEN -->
+    <div id="result-screen" class="screen">
+      <div class="bg-layer" style="background:var(--bg-dark);"></div>
+      <div class="result-panel slide-up">
+        <div class="result-title">Yelp Review</div>
+        <div id="result-stars" class="result-stars"></div>
+        <div id="result-review" class="result-review"></div>
+        <div id="result-earnings" class="result-earnings"></div>
+        <div id="result-delivery-text" class="result-delivery"></div>
+        <button class="result-btn" id="result-next-btn">Next Client →</button>
+      </div>
+    </div>
+
+    <!-- END SCREEN — #17: Main Menu button -->
+    <div id="end-screen" class="screen">
+      <div class="bg-layer" style="background:var(--bg-dark);"></div>
+      <div class="end-panel slide-up">
+        <div class="end-title">Thanks for playing Kadence!</div>
+        <div class="end-stats" id="end-stats"></div>
+        <button class="result-btn" data-action="end-main-menu">Main Menu</button>
+      </div>
+    </div>
+
+    <!-- PAUSE OVERLAY -->
+    <div id="pause-screen" class="screen">
+      <div class="bg-layer"></div>
+      <div style="position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;">
+        <div class="pause-title">Pause</div>
+        <div class="pause-menu">
+          <button class="pause-btn" data-action="resume">Resume</button>
+          <button class="pause-btn" data-action="pause-settings">Settings</button>
+          <button class="pause-btn" data-action="pause-save">Save Game</button>
+          <button class="pause-btn" data-action="pause-load">Load Game</button>
+          <button class="pause-btn" data-action="pause-main-menu">Main Menu</button>
+          <button class="pause-btn" data-action="pause-quit">Quit</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- BIKESUPPLY STORE — Full e-commerce layout (Inter font) -->
+    <div id="store-screen" class="screen">
+      <div class="store-wrapper">
+        <!-- HEADER -->
+        <header class="store-header">
+          <div class="store-logo">BikeSupply</div>
+          <div class="store-search">
+            <svg class="store-search-icon" width="19" height="19" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="#515151" stroke-width="1.5"/><path d="M16 16L20 20" stroke="#515151" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <input type="text" class="store-search-input" id="store-search" placeholder="Search parts or packs...">
+          </div>
+          <div class="store-user">
+            <div class="store-balance">Balance: <span class="store-balance-val" id="store-balance-val">$0.00</span></div>
+            <div class="store-icons">
+              <div class="store-icon-btn" title="Cart"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M6 2L3 6V20C3 21.1 3.9 22 5 22H19C20.1 22 21 21.1 21 20V6L18 2H6Z" stroke="#3B3B3B" stroke-width="1.5"/><path d="M3 6H21" stroke="#3B3B3B" stroke-width="1.5"/><path d="M16 10C16 12.2 14.2 14 12 14C9.8 14 8 12.2 8 10" stroke="#3B3B3B" stroke-width="1.5"/></svg><span class="store-cart-dot hidden" id="store-cart-dot"></span></div>
+              <button class="store-icon-btn store-close-x" id="store-close-btn" title="Close"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6L18 18" stroke="#3B3B3B" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+            </div>
+          </div>
+        </header>
+        <!-- MAIN -->
+        <div class="store-main">
+          <!-- FILTERS SIDEBAR -->
+          <aside class="store-filters">
+            <div class="store-filters-top"><span class="store-filters-title">Filters</span><button class="store-filters-clear" id="store-filters-clear">Clear All</button></div>
+            <div class="filter-section"><button class="filter-section-header" data-toggle="filter-cat"><span>Category</span><svg class="filter-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 9L12 15L18 9" stroke="#515151" stroke-width="1" stroke-linecap="round"/></svg></button><div class="filter-section-body" id="filter-cat"><label class="filter-check"><input type="checkbox" data-cat-filter="component_packs"> Component Packs</label><label class="filter-check"><input type="checkbox" data-cat-filter="frames"> Frame Sets</label><label class="filter-check"><input type="checkbox" data-cat-filter="wheels"> Wheels & Tires</label><label class="filter-check"><input type="checkbox" data-cat-filter="drivetrain"> Drivetrain & Brakes</label><label class="filter-check"><input type="checkbox" data-cat-filter="accessories"> Accessories</label></div></div>
+            <div class="filter-section"><button class="filter-section-header" data-toggle="filter-price"><span>Price</span><svg class="filter-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 9L12 15L18 9" stroke="#515151" stroke-width="1" stroke-linecap="round"/></svg></button><div class="filter-section-body" id="filter-price"><div class="filter-price-labels"><span>Min: $<span id="filter-price-min">0</span></span><span>Max: $<span id="filter-price-max">500</span></span></div><input type="range" class="filter-slider" id="filter-price-slider" min="0" max="500" value="500"></div></div>
+            <div class="filter-section"><button class="filter-section-header" data-toggle="filter-stats"><span>Target Stats</span><svg class="filter-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 9L12 15L18 9" stroke="#515151" stroke-width="1" stroke-linecap="round"/></svg></button><div class="filter-section-body" id="filter-stats"><label class="filter-check"><input type="checkbox" data-stat-filter="speed"> Speed-Focused</label><label class="filter-check"><input type="checkbox" data-stat-filter="comfort"> Comfort-Focused</label><label class="filter-check"><input type="checkbox" data-stat-filter="durability"> High Durability</label><label class="filter-check"><input type="checkbox" data-stat-filter="style"> Style & Vintage</label></div></div>
+            <div class="filter-section"><button class="filter-section-header" data-toggle="filter-brand"><span>Brand</span><svg class="filter-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 9L12 15L18 9" stroke="#515151" stroke-width="1" stroke-linecap="round"/></svg></button><div class="filter-section-body" id="filter-brand"><label class="filter-check"><input type="checkbox" data-brand-filter="SHAMANO"> Shamano</label><label class="filter-check"><input type="checkbox" data-brand-filter="ROOTS HERITAGE"> Roots Heritage</label><label class="filter-check"><input type="checkbox" data-brand-filter="NO-NAME"> No-Name</label><label class="filter-check"><input type="checkbox" data-brand-filter="V-TWOO"> V-Twoo</label><label class="filter-check"><input type="checkbox" data-brand-filter="AERODYNE"> AeroDyne</label><label class="filter-check"><input type="checkbox" data-brand-filter="BRAM"> BRAM</label></div></div>
+          </aside>
+          <div class="store-divider"></div>
+          <!-- PRODUCTS -->
+          <div class="store-products-area">
+            <div class="store-products-top"><span class="store-showing" id="store-showing">Showing 0 of 0 items</span><div class="store-sort"><span class="store-sort-label">Sort by:</span><button class="store-sort-btn" id="store-sort-btn">Featured <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M6 9L12 15L18 9" stroke="rgba(255,255,255,0.8)" stroke-width="2" stroke-linecap="round"/></svg></button></div></div>
+            <div class="store-grid" id="store-grid"></div>
+            <div class="store-pagination"><div class="store-pagination-line"></div><div class="store-pagination-controls"><button class="store-page-btn" data-page="prev">‹</button><button class="store-page-btn active" data-page="1">1</button><button class="store-page-btn" data-page="2">2</button><button class="store-page-btn" data-page="3">3</button><button class="store-page-btn" data-page="4">4</button><button class="store-page-btn" data-page="next">›</button></div><button class="store-load-more" id="store-load-more">Load More</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- #19: SUBMIT POPUP — follows guideline exactly -->
+    <div id="confirm-overlay" class="confirm-overlay">
+      <div class="confirm-box">
+        <div class="confirm-text">Are you sure?</div>
+        <div class="confirm-actions">
+          <button class="confirm-btn primary" id="confirm-yes">Yes</button>
+          <button class="confirm-btn" id="confirm-no">No</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/game.js"></script>
+</body>
+</html>
