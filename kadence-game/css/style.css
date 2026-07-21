@@ -845,7 +845,9 @@ html, body {
 
 /* Label text */
 .ws-label-text {
-  white-space: nowrap;
+  white-space: normal;
+  max-width: 180px;
+  word-wrap: break-word;
 }
 .ws-label-cat {
   font-family: var(--font-body);
@@ -1367,7 +1369,7 @@ html, body {
 .store-card-add.equipped-btn { background: #999; cursor: default; }
 
 /* PAGINATION */
-.store-pagination { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+.store-pagination { display: none !important; }
 .store-pagination-line { width: 302px; height: 0; border-top: 1px solid #515151; }
 .store-pagination-controls { display: flex; gap: 7px; align-items: center; }
 .store-page-btn {

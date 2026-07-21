@@ -675,7 +675,7 @@ class Game {
       search: ''
     };
     this._storePage = 1;
-    this._storePerPage = 6;
+    this._storePerPage = 100;
     this._storeSort = 'featured';
 
     // Reset DOM elements of the store
