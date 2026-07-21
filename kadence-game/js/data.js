@@ -472,11 +472,11 @@ const DIALOGUES = {
   hanna: {
     intro: {
       en: [
-        { speaker: 'narrator', text: 'The bell rings. Hanna walks in, looking completely defeated, holding a notepad.' },
-        { speaker: 'hanna', text: 'Hi... Are you the mechanic?' },
-        { speaker: 'ash', text: 'That's what the sign on the door says. Welcome to Kadence. Rough day?' },
-        { speaker: 'hanna', text: 'Rough week. I just bought a bike off the local marketplace. I wanted to start commuting to work, but it's a disaster. Every time I turn, my toe hits the front wheel! And it's so heavy I can barely carry it up to my apartment.' },
-        { speaker: 'ash', text: 'Toe overlap and a heavy frame. Classic.' }
+        { speaker: "narrator", text: "The bell rings. Hanna walks in, looking completely defeated, holding a notepad." },
+        { speaker: "hanna", text: "Hi... Are you the mechanic?" },
+        { speaker: "ash", text: "That's what the sign on the door says. Welcome to Kadence. Rough day?" },
+        { speaker: "hanna", text: "Rough week. I just bought a bike off the local marketplace. I wanted to start commuting to work, but it's a disaster. Every time I turn, my toe hits the front wheel! And it's so heavy I can barely carry it up to my apartment." },
+        { speaker: "ash", text: "Toe overlap and a heavy frame. Classic." }
       ],
       ru: [
         { speaker: 'narrator', text: 'Звенит дверной колокольчик. Заходит Ханна, выглядит абсолютно измученной, в руках блокнот.' },
@@ -489,15 +489,15 @@ const DIALOGUES = {
     choices: [
       {
         id: 'hanna_c1',
-        question: { en: 'How to fix her bike problem?', ru: 'Как решить проблему с её велосипедом?' },
+        question: { en: "How to fix her bike problem?", ru: "Как решить проблему с её велосипедом?" },
         options: [
           {
             id: 'hanna_c1_a',
-            text: { en: '"Sounds like you bought a steel mountain bike. We need to switch you to a lightweight aluminum frame."', ru: '"Звучит так, будто вы купили стальной горник. Вам нужно переходить на легкую алюминиевую раму".' },
+            text: { en: "Sounds like you bought a steel mountain bike. We need to switch you to a lightweight aluminum frame.", ru: '"Звучит так, будто вы купили стальной горник. Вам нужно переходить на легкую алюминиевую раму".' },
             response: {
               en: [
-                { speaker: 'hanna', text: 'Steel? I didn't even check the specs, I just bought it because it was matte black! But yes, a lighter frame sounds amazing.' },
-                { speaker: 'ash', text: 'Rule number one: never buy a bike just because it looks cool.' }
+                { speaker: "hanna", text: "Steel? I didn't even check the specs, I just bought it because it was matte black! But yes, a lighter frame sounds amazing." },
+                { speaker: "ash", text: "Rule number one: never buy a bike just because it looks cool." }
               ],
               ru: [
                 { speaker: 'hanna', text: 'Сталь? Я даже не читала характеристики, просто купила, потому что он был матово-черный! Но да, легкая рама — это звучит как мечта.' },
@@ -508,11 +508,11 @@ const DIALOGUES = {
           },
           {
             id: 'hanna_c1_b',
-            text: { en: '"Toe overlap? How tall are you? The frame size is probably completely wrong."', ru: '"Цепляете колесо? А какой у вас рост? Скорее всего, вам продали раму совершенно чужого размера".' },
+            text: { en: "Toe overlap? How tall are you? The frame size is probably completely wrong.", ru: '"Цепляете колесо? А какой у вас рост? Скорее всего, вам продали раму совершенно чужого размера".' },
             response: {
               en: [
-                { speaker: 'hanna', text: 'I'm 158 cm. The seller told me "one size fits all"! Was he lying?' },
-                { speaker: 'ash', text: '"One size fits all" is the biggest lie in the cycling industry.' }
+                { speaker: "hanna", text: "I'm 158 cm. The seller told me 'one size fits all'! Was he lying?" },
+                { speaker: "ash", text: "'One size fits all' is the biggest lie in the cycling industry." }
               ],
               ru: [
                 { speaker: 'hanna', text: 'Мой рост 158 см. А продавец сказал мне, что этот велик "универсальный, подходит всем"! Он мне врал?' },
@@ -525,15 +525,15 @@ const DIALOGUES = {
       },
       {
         id: 'hanna_c2',
-        question: { en: 'What about her drivetrain issues?', ru: 'А что насчёт проблем с амортизацией и переключениями?' },
+        question: { en: "What about her drivetrain issues?", ru: "А что насчёт проблем с амортизацией и переключениями?" },
         options: [
           {
             id: 'hanna_c2_a',
-            text: { en: '"You don't need suspension for city commuting. A rigid fork will save your energy."', ru: '"Вам не нужны амортизаторы для езды по городу. Жесткая вилка сэкономит вашу энергию".' },
+            text: { en: "You don't need suspension for city commuting. A rigid fork will save your energy.", ru: '"Вам не нужны амортизаторы для езды по городу. Жесткая вилка сэкономит вашу энергию".' },
             response: {
               en: [
-                { speaker: 'hanna', text: 'A rigid fork? Won't that be bumpy? Honestly, I don't care, as long as it helps me actually get up the hill without dying.' },
-                { speaker: 'ash', text: 'Smart choice. Fake suspension on cheap bikes just steals your pedaling power.' }
+                { speaker: "hanna", text: "A rigid fork? Won't that be bumpy? Honestly, I don't care, as long as it helps me actually get up the hill without dying." },
+                { speaker: "ash", text: "Smart choice. Fake suspension on cheap bikes just steals your pedaling power." }
               ],
               ru: [
                 { speaker: 'hanna', text: 'Жесткая вилка? А трясти не будет? Хотя, честно говоря, мне уже плевать, лишь бы я могла заехать в эту проклятую горку и не умереть.' },
@@ -544,11 +544,11 @@ const DIALOGUES = {
           },
           {
             id: 'hanna_c2_b',
-            text: { en: '"You probably have too many gears. Let's simplify your drivetrain."', ru: '"Скорее всего, у вас слишком много передач. Давайте поставим простую и надежную трансмиссию".' },
+            text: { en: "You probably have too many gears. Let's simplify your drivetrain.", ru: '"Скорее всего, у вас слишком много передач. Давайте поставим простую и надежную трансмиссию".' },
             response: {
               en: [
-                { speaker: 'hanna', text: 'Yes! My current bike has like 21 gears, and the chain keeps falling off when I switch the left lever. It's a nightmare.' },
-                { speaker: 'ash', text: 'A simple 1x drivetrain is what she needs. No front derailleur, no dropped chains.' }
+                { speaker: "hanna", text: "Yes! My current bike has like 21 gears, and the chain keeps falling off when I switch the left lever. It's a nightmare." },
+                { speaker: "ash", text: "A simple 1x drivetrain is what she needs. No front derailleur, no dropped chains." }
               ],
               ru: [
                 { speaker: 'hanna', text: 'Да! На моем велике что-то около 21 скорости, и цепь постоянно слетает, когда я щелкаю левым переключателем. Это кошмар.' },
@@ -562,8 +562,8 @@ const DIALOGUES = {
     ],
     budgetReveal: {
       en: [
-        { speaker: 'hanna', text: 'So... can you build me something light, simple, and actually my size? My budget is pretty tight, around $350 max.' },
-        { speaker: 'ash', text: 'Leave it to us. You won't be fighting your bike anymore.' }
+        { speaker: "hanna", text: "So... can you build me something light, simple, and actually my size? My budget is pretty tight, around $350 max." },
+        { speaker: "ash", text: "Leave it to us. You won't be fighting your bike anymore." }
       ],
       ru: [
         { speaker: 'hanna', text: 'В общем... вы сможете собрать мне что-то легкое, простое и моего размера? Мой бюджет сильно ограничен, максимум 350 баксов.' },
@@ -574,10 +574,10 @@ const DIALOGUES = {
     delivery: {
       perfect: {
         en: [
-          { speaker: 'hanna', text: 'Is it ready? Tell me it doesn't weigh 20 kilos!' },
-          { speaker: 'ash', text: 'Here. Try lifting it.' },
-          { speaker: 'hanna', text: 'Oh wow... It's so light! And the gears look so simple to use! Thank you so much, I can actually look forward to my commute now!' },
-          { speaker: 'ash', text: 'Another pair of knees saved. We're basically doctors, but with wrenches.' }
+          { speaker: "hanna", text: "Is it ready? Tell me it doesn't weigh 20 kilos!" },
+          { speaker: "ash", text: "Here. Try lifting it." },
+          { speaker: "hanna", text: "Oh wow... It's so light! And the gears look so simple to use! Thank you so much, I can actually look forward to my commute now!" },
+          { speaker: "ash", text: "Another pair of knees saved. We're basically doctors, but with wrenches." }
         ],
         ru: [
           { speaker: 'hanna', text: 'Готово? Скажите мне, что он не весит 20 килограмм!' },
@@ -588,8 +588,8 @@ const DIALOGUES = {
       },
       bad: {
         en: [
-          { speaker: 'hanna', text: 'Wait... this is just as heavy as my old one! And why does it have suspension? I told you I just ride on asphalt!' },
-          { speaker: 'ash', text: 'We just sold a tractor to someone who needed a scooter. Not our best work.' }
+          { speaker: "hanna", text: "Wait... this is just as heavy as my old one! And why does it have suspension? I told you I just ride on asphalt!" },
+          { speaker: "ash", text: "We just sold a tractor to someone who needed a scooter. Not our best work." }
         ],
         ru: [
           { speaker: 'hanna', text: 'Погодите... он такой же тяжелый, как мой старый! И зачем тут амортизаторы? Я же говорила, что езжу только по асфальту! Я не думаю, что могу позволить себе тратить деньги на это...' },
@@ -602,8 +602,8 @@ const DIALOGUES = {
   tony: {
     intro: {
       en: [
-        { speaker: 'tony', text: 'Meh, screw this! I was rushing home and there was that old man in his stupid brown jacket and that damn cane! There was no space to overtake him properly and I was given a choice: either I go offroad through that grass on the left, or I go to the right through a sand pit.' },
-        { speaker: 'tony', text: 'It looked really tiny and I thought it would not make any difference... I could have just waited but my ego pushed me to increase speed and go through sand. As you can clearly see, it did not end well.' }
+        { speaker: "tony", text: "Meh, screw this! I was rushing home and there was that old man in his stupid brown jacket and that damn cane! There was no space to overtake him properly and I was given a choice: either I go offroad through that grass on the left, or I go to the right through a sand pit." },
+        { speaker: "tony", text: "It looked really tiny and I thought it would not make any difference... I could have just waited but my ego pushed me to increase speed and go through sand. As you can clearly see, it did not end well." }
       ],
       ru: [
         { speaker: 'tony', text: 'Ля, да пошло оно все! Я летел домой и там по дорожке дед шел хромающий в своей всратой коричневой курточке и с тростью. Он все место занял и я не мог его объехать как-нибудь нормально. Было два варианта: налево на траву или направо в песочек.' },
@@ -613,16 +613,16 @@ const DIALOGUES = {
     choices: [
       {
         id: 'tony_c1',
-        question: { en: 'How to approach Tony's request?', ru: 'Как подойти к расспросу Тони?' },
+        question: { en: "How to approach Tony's request?", ru: 'Как подойти к расспросу Тони?' },
         options: [
           {
             id: 'tony_c1_a',
-            text: { en: '"What are your physical parameters?"', ru: 'Узнать его габариты, чтобы понять масштаб разрушений.' },
+            text: { en: "What are your physical parameters?", ru: 'Узнать его габариты, чтобы понять масштаб разрушений.' },
             response: {
               en: [
-                { speaker: 'ash', text: 'Well, shit happens, mate. What are your physical parameters?' },
-                { speaker: 'tony', text: '190/125. I'm a heavy ass man.' },
-                { speaker: 'ash', text: 'We're talking e-bikes at this point unless you want to break your ankles.' }
+                { speaker: "ash", text: "Well, shit happens, mate. What are your physical parameters?" },
+                { speaker: "tony", text: "190/125. I'm a heavy ass man." },
+                { speaker: "ash", text: "We're talking e-bikes at this point unless you want to break your ankles." }
               ],
               ru: [
                 { speaker: 'ash', text: 'Охх, блин. Ну, бывает. Ерунда случается. Какие у тебя физические параметры? Типа, рост и вес.' },
@@ -634,12 +634,12 @@ const DIALOGUES = {
           },
           {
             id: 'tony_c1_b',
-            text: { en: '"Silently agree to build the bike."', ru: 'Молча согласиться собрать байк.' },
+            text: { en: "Silently agree to build the bike.", ru: 'Молча согласиться собрать байк.' },
             response: {
               en: [
-                { speaker: 'ash', text: '...' },
-                { speaker: 'tony', text: 'Well? You gonna say something or just stare at me?' },
-                { speaker: 'ash', text: '(That was a mistake. I should have asked about his weight first.)' }
+                { speaker: "ash", text: "..." },
+                { speaker: "tony", text: "Well? You gonna say something or just stare at me?" },
+                { speaker: "ash", text: "(That was a mistake. I should have asked about his weight first.)" }
               ],
               ru: [
                 { speaker: 'ash', text: '...' },
@@ -653,16 +653,16 @@ const DIALOGUES = {
       },
       {
         id: 'tony_c2',
-        question: { en: 'What about the bike model he wants?', ru: 'А что насчёт модели велосипеда?' },
+        question: { en: "What about the bike model he wants?", ru: 'А что насчёт модели велосипеда?' },
         options: [
           {
             id: 'tony_c2_a',
-            text: { en: '"Place an order for the Kaigu Ronin V8."', ru: 'Оформить заказ на Kaigu Ronin V8.' },
+            text: { en: "Place an order for the Kaigu Ronin V8.", ru: 'Оформить заказ на Kaigu Ronin V8.' },
             response: {
               en: [
-                { speaker: 'ash', text: 'Sure, let me just...' },
-                { speaker: 'tony', text: 'Great!' },
-                { speaker: 'ash', text: '(Wait... that bike is tiny. He'll destroy it in a week.)' }
+                { speaker: "ash", text: "Sure, let me just..." },
+                { speaker: "tony", text: "Great!" },
+                { speaker: "ash", text: "(Wait... that bike is tiny. He'll destroy it in a week.)" }
               ],
               ru: [
                 { speaker: 'ash', text: 'Конечно, давай-ка я оформлю...' },
@@ -674,12 +674,12 @@ const DIALOGUES = {
           },
           {
             id: 'tony_c2_b',
-            text: { en: '"Interrupt him! The Kaigu won't survive him!"', ru: 'Жёстко перебить его! Kaigu его не выдержит!' },
+            text: { en: "Interrupt him! The Kaigu won't survive him!", ru: 'Жёстко перебить его! Kaigu его не выдержит!' },
             response: {
               en: [
-                { speaker: 'ash', text: 'MATE NO! That thing is tiny! You'd look like a circus bear riding a monobike.' },
-                { speaker: 'tony', text: 'Aww. It looked much bigger in the pictures. Damn. You do customs?' },
-                { speaker: 'ash', text: 'Of course! Anything you can imagine.' }
+                { speaker: "ash", text: "MATE NO! That thing is tiny! You'd look like a circus bear riding a monobike." },
+                { speaker: "tony", text: "Aww. It looked much bigger in the pictures. Damn. You do customs?" },
+                { speaker: "ash", text: "Of course! Anything you can imagine." }
               ],
               ru: [
                 { speaker: 'ash', text: 'ЧУВАК, НЕТ! Эта штука просто крохотная. Вот, посмотри на улицу, стоит в углу чей-то. Если ты на нее сядешь, тебя с цирковым медведем на моноколесе путать будут.' },
@@ -694,8 +694,8 @@ const DIALOGUES = {
     ],
     budgetReveal: {
       en: [
-        { speaker: 'tony', text: 'Build something that would be fast, comfortable, electric and not too expensive. Now I gotta leave and wash that jacket. Goddamn old man... Cya tomorrow.' },
-        { speaker: 'ash', text: 'See you tomorrow, big guy.' }
+        { speaker: "tony", text: "Build something that would be fast, comfortable, electric and not too expensive. Now I gotta leave and wash that jacket. Goddamn old man... Cya tomorrow." },
+        { speaker: "ash", text: "See you tomorrow, big guy." }
       ],
       ru: [
         { speaker: 'tony', text: 'Собери что-то быстрое, комфортное, электрическое и не слишком дорогое. Мне пора пойти отстирать эту куртку от песка. Чёртов дед... Давай, до завтра.' },
@@ -706,10 +706,10 @@ const DIALOGUES = {
     delivery: {
       perfect: {
         en: [
-          { speaker: 'tony', text: 'Hey there, dog! What's up with that bike?' },
-          { speaker: 'ash', text: 'Yooo! There it is.' },
-          { speaker: 'tony', text: 'Here's the money. If I never come back, I'm either dead or happy. Thanks!' },
-          { speaker: 'ash', text: 'You are totally welcome.' }
+          { speaker: "tony", text: "Hey there, dog! What's up with that bike?" },
+          { speaker: "ash", text: "Yooo! There it is." },
+          { speaker: "tony", text: "Here's the money. If I never come back, I'm either dead or happy. Thanks!" },
+          { speaker: "ash", text: "You are totally welcome." }
         ],
         ru: [
           { speaker: 'tony', text: 'Здорово, пёсель! Как там мой бронепоезд на колёсах?' },
@@ -720,9 +720,9 @@ const DIALOGUES = {
       },
       bad: {
         en: [
-          { speaker: 'tony', text: 'This looks... flimsy. Are you sure this can handle my weight?' },
-          { speaker: 'ash', text: 'Well... it was supposed to...' },
-          { speaker: 'tony', text: 'I'm not paying full price for this death trap.' }
+          { speaker: "tony", text: "This looks... flimsy. Are you sure this can handle my weight?" },
+          { speaker: "ash", text: "Well... it was supposed to..." },
+          { speaker: "tony", text: "I'm not paying full price for this death trap." }
         ],
         ru: [
           { speaker: 'tony', text: 'Это выглядит... как-то хлипко. Ты уверен, что эта зубочистка выдержит мои 125 кг?' },
@@ -736,7 +736,7 @@ const DIALOGUES = {
   dzed: {
     intro: {
       en: [
-        { speaker: 'dzed', text: 'Good day, young man. I need... how do you say... a bicycle. Like the one I had in 1983.' }
+        { speaker: "dzed", text: "Good day, young man. I need... how do you say... a bicycle. Like the one I had in 1983." }
       ],
       ru: [
         { speaker: 'dzed', text: 'Здорово, молодой. Че тут у тебя... Спекуляцией молодежной занимаешься?' },
@@ -748,15 +748,15 @@ const DIALOGUES = {
     choices: [
       {
         id: 'dzed_c1',
-        question: { en: 'What does Dzed need?', ru: 'Как поступим со сборкой для дедушки?' },
+        question: { en: "What does Dzed need?", ru: 'Как поступим со сборкой для дедушки?' },
         options: [
           {
             id: 'dzed_c1_a',
-            text: { en: '"Tell me about your old bike. What was special about it?"', ru: 'Предложить сделать как было — без передач, тормоз педалью назад.' },
+            text: { en: "Tell me about your old bike. What was special about it?", ru: 'Предложить сделать как было — без передач, тормоз педалью назад.' },
             response: {
               en: [
-                { speaker: 'dzed', text: 'Ah... it was heavy, yes. But so soft! Like riding on a cloud. And it had that beautiful brown leather seat...' },
-                { speaker: 'ash', text: 'He wants comfort above everything. And vintage aesthetics.' }
+                { speaker: "dzed", text: "Ah... it was heavy, yes. But so soft! Like riding on a cloud. And it had that beautiful brown leather seat..." },
+                { speaker: "ash", text: "He wants comfort above everything. And vintage aesthetics." }
               ],
               ru: [
                 { speaker: 'dzed', text: 'А давай! Но чтоб никаких передач этих дурацких! Сел и поехал. И чтоб тормоз нормальный был, педалью назад! Как при союзе было. А то нажмешь случайно рукой на руле, и через руль улетишь головой в кал. Смогёшь?' },
@@ -767,11 +767,11 @@ const DIALOGUES = {
           },
           {
             id: 'dzed_c1_b',
-            text: { en: '"How fast do you need to go?"', ru: 'Убедить взять современный вариант с простым ручным тормозом.' },
+            text: { en: "How fast do you need to go?", ru: 'Убедить взять современный вариант с простым ручным тормозом.' },
             response: {
               en: [
-                { speaker: 'dzed', text: 'Fast? Ha! At my age, speed is the enemy. I just want to pedal gently to the market and back without my back killing me.' },
-                { speaker: 'ash', text: 'Slow and comfortable. Got it.' }
+                { speaker: "dzed", text: "Fast? Ha! At my age, speed is the enemy. I just want to pedal gently to the market and back without my back killing me." },
+                { speaker: "ash", text: "Slow and comfortable. Got it." }
               ],
               ru: [
                 { speaker: 'ash', text: 'Можно сделать проще: одна скорость, но тормоз уже ручной — безопаснее для суставов, чем резкое торможение назад.' },
@@ -786,8 +786,8 @@ const DIALOGUES = {
     ],
     budgetReveal: {
       en: [
-        { speaker: 'dzed', text: 'I don't have much money, I'm afraid. Pension is small. Maybe... $200? Is that enough for something decent?' },
-        { speaker: 'ash', text: 'Don't worry, grandpa. We'll take care of you.' }
+        { speaker: "dzed", text: "I don't have much money, I'm afraid. Pension is small. Maybe... $200? Is that enough for something decent?" },
+        { speaker: "ash", text: "Don't worry, grandpa. We'll take care of you." }
       ],
       ru: [
         { speaker: 'dzed', text: 'Эх... если ломаться нечему, давай попробуем. Но пенсия не резиновая, сынок, а вы тут, небось, миллионы за свои железки просите. Может... рублей 200 нашими? Хватит на нормальный ровар?' },
@@ -798,8 +798,8 @@ const DIALOGUES = {
     delivery: {
       perfect: {
         en: [
-          { speaker: 'dzed', text: 'Oh my... this is beautiful. It reminds me of my youth. Thank you, son.' },
-          { speaker: 'ash', text: 'Ride safe, grandpa. And take the scenic route.' }
+          { speaker: "dzed", text: "Oh my... this is beautiful. It reminds me of my youth. Thank you, son." },
+          { speaker: "ash", text: "Ride safe, grandpa. And take the scenic route." }
         ],
         ru: [
           { speaker: 'dzed', text: 'Ох ты ж батюшки... Какая красота! Прямо как мой первый ровар в молодости! И покрашен красиво, по-человечески. Спасибо тебе, сынок, дай бог здоровья тебе и твоему мохнатому помощнику!' },
@@ -808,8 +808,8 @@ const DIALOGUES = {
       },
       bad: {
         en: [
-          { speaker: 'dzed', text: 'This... this is too fast for me. And so uncomfortable! My back will never forgive me...' },
-          { speaker: 'ash', text: 'We missed the mark on this one. Sorry, grandpa.' }
+          { speaker: "dzed", text: "This... this is too fast for me. And so uncomfortable! My back will never forgive me..." },
+          { speaker: "ash", text: "We missed the mark on this one. Sorry, grandpa." }
         ],
         ru: [
           { speaker: 'dzed', text: 'Это... это что за чудище лесное? Зачем мне эти ручки на руле? И сиденье жесткое как кирпич, я ж себе все суставы отобью! Нет, сынок, на таком я ездить не смогу, спина сразу откажет...' },
@@ -822,7 +822,7 @@ const DIALOGUES = {
   vitalya: {
     intro: {
       en: [
-        { speaker: 'vitalya', text: 'Yo. I need the sickest fixie you can build. No brakes. Brakes are for cowards.' }
+        { speaker: "vitalya", text: "Yo. I need the sickest fixie you can build. No brakes. Brakes are for cowards." }
       ],
       ru: [
         { speaker: 'vitalya', text: 'Здарова! Чё вы тут, велики продаете еще?' },
@@ -834,15 +834,15 @@ const DIALOGUES = {
     choices: [
       {
         id: 'vitalya_c1',
-        question: { en: 'What does Vitalya care about?', ru: 'Куда сделаем фокус в разговоре?' },
+        question: { en: "What does Vitalya care about?", ru: 'Куда сделаем фокус в разговоре?' },
         options: [
           {
             id: 'vitalya_c1_a',
-            text: { en: '"Speed and style, got it. But are you sure about no brakes?"', ru: '«Мы можем сделать его еще быстрее, но на плохих дорогах будет очень некомфортно».' },
+            text: { en: "Speed and style, got it. But are you sure about no brakes?", ru: '«Мы можем сделать его еще быстрее, но на плохих дорогах будет очень некомфортно».' },
             response: {
               en: [
-                { speaker: 'vitalya', text: 'DID I STUTTER? No. Brakes. Brakes are death. We die like men.' },
-                { speaker: 'ash', text: 'Alright, alright! No brakes it is. This kid has a death wish.' }
+                { speaker: "vitalya", text: "DID I STUTTER? No. Brakes. Brakes are death. We die like men." },
+                { speaker: "ash", text: "Alright, alright! No brakes it is. This kid has a death wish." }
               ],
               ru: [
                 { speaker: 'vitalya', text: 'Комфорт?! Да мне плевать, если моя спина сломается пополам, я просто хочу обгонять тачки! Сделай, чтобы он выглядел агрессивно.' },
@@ -853,11 +853,11 @@ const DIALOGUES = {
           },
           {
             id: 'vitalya_c1_b',
-            text: { en: '"What about comfort? Your back will thank you..."', ru: '«Если хочешь чистый адреналин, нужно выкинуть вообще всё лишнее».' },
+            text: { en: "What about comfort? Your back will thank you...", ru: '«Если хочешь чистый адреналин, нужно выкинуть вообще всё лишнее».' },
             response: {
               en: [
-                { speaker: 'vitalya', text: 'Comfort? COMFORT? I'm not a grandpa! I ride until my legs give out, then I ride some more!' },
-                { speaker: 'ash', text: 'Right. Comfort is not in his vocabulary.' }
+                { speaker: "vitalya", text: "Comfort? COMFORT? I'm not a grandpa! I ride until my legs give out, then I ride some more!" },
+                { speaker: "ash", text: "Right. Comfort is not in his vocabulary." }
               ],
               ru: [
                 { speaker: 'vitalya', text: 'Вот именно! Меньше веса — больше скорости! Я хочу летать между машин как ракета. И чтоб выглядел дерзко, понимаешь? Стрит-стайл!' },
@@ -871,8 +871,8 @@ const DIALOGUES = {
     ],
     budgetReveal: {
       en: [
-        { speaker: 'vitalya', text: 'I got about $400 from my last gig. Make it fast, make it sick, make it BRAKELESS. Later!' },
-        { speaker: 'ash', text: 'This is going to be either amazing or a hospital visit. Probably both.' }
+        { speaker: "vitalya", text: "I got about $400 from my last gig. Make it fast, make it sick, make it BRAKELESS. Later!" },
+        { speaker: "ash", text: "This is going to be either amazing or a hospital visit. Probably both." }
       ],
       ru: [
         { speaker: 'vitalya', text: 'Я поднял около 400 баксов с последнего фриланса. Сделай мне его максимально быстрым, злым и главное — БЕЗ ТОРМОЗОВ. Тормоза для слабаков! Давай, на связи!' },
@@ -883,8 +883,8 @@ const DIALOGUES = {
     delivery: {
       perfect: {
         en: [
-          { speaker: 'vitalya', text: 'YO THIS IS FIRE! No brakes, pure speed, pure style! I'm gonna be the king of the streets!' },
-          { speaker: 'ash', text: 'Please wear a helmet. Actually, wear two.' }
+          { speaker: "vitalya", text: "YO THIS IS FIRE! No brakes, pure speed, pure style! I'm gonna be the king of the streets!" },
+          { speaker: "ash", text: "Please wear a helmet. Actually, wear two." }
         ],
         ru: [
           { speaker: 'vitalya', text: 'ЙОУ, ЭТО ПРОСТО СЕКС! Никаких тормозов, чистая скорость, дикий стрит-арт! Я буду королем трафика на этом снаряде!' },
@@ -893,11 +893,11 @@ const DIALOGUES = {
       },
       bad: {
         en: [
-          { speaker: 'vitalya', text: 'Dude... are those BRAKES? I said NO BRAKES! And it's so slow! I could walk faster than this!' },
-          { speaker: 'ash', text: 'Well, at least he'll be alive...' }
+          { speaker: "vitalya", text: "Dude... are those BRAKES? I said NO BRAKES! And it's so slow! I could walk faster than this!" },
+          { speaker: "ash", text: "Well, at least he'll be alive..." }
         ],
         ru: [
-          { speaker: 'vitalya', text: 'Чувак... это что, ТОРМОЗА? Я же четко сказал: НИКАКИХ ТОРМОЗОВ! И почему он такой тяжелый и медленный? Я пешком быстрее ходить буду!' },
+          { speaker: 'vitalya', text: 'Чувак... это что, ТОРМОЗА? Я же чётки сказал: НИКАКИХ ТОРМОЗОВ! И почему он такой тяжелый и медленный? Я пешком быстрее ходить буду!' },
           { speaker: 'ash', text: 'Ну... зато на этом он точно останется жив. Хотя лицо у него недовольное.' }
         ]
       }
@@ -907,7 +907,7 @@ const DIALOGUES = {
   ewa: {
     intro: {
       en: [
-        { speaker: 'ewa', text: 'Hey. Got anything that... rolls?' }
+        { speaker: "ewa", text: "Hey. Got anything that... rolls?" }
       ],
       ru: [
         { speaker: 'ewa', text: 'Привет. Хочу купить два колеса с педалями.' },
@@ -919,14 +919,14 @@ const DIALOGUES = {
     choices: [
       {
         id: 'eva_c1',
-        question: { en: 'How to approach Eva's needs?', ru: 'Как расспросим Еву о велосипеде?' },
+        question: { en: "How to approach Eva's needs?", ru: 'Как расспросим Еву о велосипеде?' },
         options: [
           {
             id: 'eva_c1_a',
-            text: { en: '"Any preferences? Suspension, gears, brakes?"', ru: 'Спросить про особые предпочтения (амортизаторы, скорости, тормоза).' },
+            text: { en: "Any preferences? Suspension, gears, brakes?", ru: 'Спросить про особые предпочтения (амортизаторы, скорости, тормоза).' },
             response: {
               en: [
-                { speaker: 'ewa', text: 'I don't give a damn. It just needs to roll and not fall apart too quickly. But I'm scraping the bottom of the barrel at this point in terms of cash...' }
+                { speaker: "ewa", text: "I don't give a damn. It just needs to roll and not fall apart too quickly. But I'm scraping the bottom of the barrel at this point in terms of cash..." }
               ],
               ru: [
                 { speaker: 'ewa', text: 'Да все равно, хоть из советских водопроводных труб свари. Главное — чтобы колеса крутились и он не развалился на пятом километре пробега. Но по бюджету у меня буквально три копейки.' }
@@ -936,11 +936,11 @@ const DIALOGUES = {
           },
           {
             id: 'eva_c1_b',
-            text: { en: '"Skip details and ask about budget directly."', ru: 'Пропустить детали и переходить сразу к бюджету.' },
+            text: { en: "Skip details and ask about budget directly.", ru: 'Пропустить детали и переходить сразу к бюджету.' },
             response: {
               en: [
-                { speaker: 'ash', text: 'Got it. Budget's tight?' },
-                { speaker: 'ewa', text: 'I don't give a damn. It just needs to roll and not fall apart too quickly. But I'm scraping the bottom of the barrel...' }
+                { speaker: "ash", text: "Got it. Budget's tight?" },
+                { speaker: "ewa", text: "I don't give a damn. It just needs to roll and not fall apart too quickly. But I'm scraping the bottom of the barrel..." }
               ],
               ru: [
                 { speaker: 'ash', text: 'Понял. Бюджет, видимо, спартанский?' },
@@ -954,8 +954,8 @@ const DIALOGUES = {
     ],
     budgetReveal: {
       en: [
-        { speaker: 'ewa', text: 'I have $130. That's literally all I have until next paycheck. Please, help me out.' },
-        { speaker: 'ash', text: 'I'll see what I can scrape together from the budget bin.' }
+        { speaker: "ewa", text: "I have $130. That's literally all I have until next paycheck. Please, help me out." },
+        { speaker: "ash", text: "I'll see what I can scrape together from the budget bin." }
       ],
       ru: [
         { speaker: 'ewa', text: 'У меня есть ровно 130 баксов. Это буквально всё, что осталось до следующей получки. Пожалуйста, выручи.' },
@@ -966,8 +966,8 @@ const DIALOGUES = {
     delivery: {
       perfect: {
         en: [
-          { speaker: 'ewa', text: 'Looks rough. But it has two wheels and pedals. I'll take it. Thanks for helping me out.' },
-          { speaker: 'ash', text: 'Safe travels. And seriously, go get some sleep!' }
+          { speaker: "ewa", text: "Looks rough. But it has two wheels and pedals. I'll take it. Thanks for helping me out." },
+          { speaker: "ash", text: "Safe travels. And seriously, go get some sleep!" }
         ],
         ru: [
           { speaker: 'ewa', text: 'Ну вот, колеса на месте, педали крутятся. Проще некуда, но мне большего и не надо. Забираю. Вот деньги. Спасибо.' },
@@ -976,8 +976,8 @@ const DIALOGUES = {
       },
       bad: {
         en: [
-          { speaker: 'ewa', text: 'This costs more than my rent... and it's falling apart. I can't afford this mistake.' },
-          { speaker: 'ash', text: 'We let her down. That one's on us.' }
+          { speaker: "ewa", text: "This costs more than my rent... and it's falling apart. I can't afford this mistake." },
+          { speaker: "ash", text: "We let her down. That one's on us." }
         ],
         ru: [
           { speaker: 'ewa', text: 'Это... это стоит больше, чем моя аренда комнаты. Да и выглядит так, будто рассыпется на первой же кочке. Нет, я не могу так рисковать своими крохами...' },
@@ -990,7 +990,7 @@ const DIALOGUES = {
   syalyanych: {
     intro: {
       en: [
-        { speaker: 'syalyanych', text: 'Oy! I need a bike for the village. Something that can handle mud, gravel, and my mother-in-law's driveway.' }
+        { speaker: "syalyanych", text: "Oy! I need a bike for the village. Something that can handle mud, gravel, and my mother-in-law's driveway." }
       ],
       ru: [
         { speaker: 'syalyanych', text: 'Здарова, хозяин! Гы. Слышь, мне это... электру надо! Самую мощную, чтоб аж искры из глаз!' },
@@ -1002,15 +1002,15 @@ const DIALOGUES = {
     choices: [
       {
         id: 'syalyanych_c1',
-        question: { en: 'What does Syalyanych need?', ru: 'Как убедим Селяныча насчёт типа байка?' },
+        question: { en: "What does Syalyanych need?", ru: 'Как убедим Селяныча насчёт типа байка?' },
         options: [
           {
             id: 'syalyanych_c1_a',
-            text: { en: '"Mud and gravel? You need serious durability. And fenders — lots of fenders."', ru: 'Спросить про гонки с тракторами (хочет догнать Петро в болоте).' },
+            text: { en: "Mud and gravel? You need serious durability. And fenders — lots of fenders.", ru: 'Спросить про гонки с тракторами (хочет догнать Петро в болоте).' },
             response: {
               en: [
-                { speaker: 'syalyanych', text: 'Yes! Fenders! Last time I rode without them, I came home looking like a chocolate cake.' },
-                { speaker: 'ash', text: 'Mud fenders it is. And something that won't break on the first pothole.' }
+                { speaker: "syalyanych", text: "Yes! Fenders! Last time I rode without them, I came home looking like a chocolate cake." },
+                { speaker: "ash", text: "Mud fenders it is. And something that won't break on the first pothole." }
               ],
               ru: [
                 { speaker: 'syalyanych', text: 'Какая дискотека, ёлки-палки! Мне за тракторами по пахоте гонять надо! Наш Петро на "Беларусе" как втопит по грязище после дождя, а я за ним на дыбы — и у-у-у-ух! Бабки есть, не боись, не обижу!' },
@@ -1021,11 +1021,11 @@ const DIALOGUES = {
           },
           {
             id: 'syalyanych_c1_b',
-            text: { en: '"How much are you willing to spend?"', ru: 'Предупредить, что тяжелая электра в болоте сразу сгорит.' },
+            text: { en: "How much are you willing to spend?", ru: 'Предупредить, что тяжелая электра в болоте сразу сгорит.' },
             response: {
               en: [
-                { speaker: 'syalyanych', text: 'Not much, friend. Maybe $300? But it better survive a nuclear winter!' },
-                { speaker: 'ash', text: '$300 for a tank. Challenge accepted.' }
+                { speaker: "syalyanych", text: "Not much, friend. Maybe $300? But it better survive a nuclear winter!" },
+                { speaker: "ash", text: "$300 for a tank. Challenge accepted." }
               ],
               ru: [
                 { speaker: 'ash', text: 'Погоди-ка. Электра в болоте? Ты ее в первой же луже утопишь. Вода в мотор — аккум закоротит, хана. Будешь 50 кг на хребте тащить до хаты. Тебе педальный грязевик нужен.' },
@@ -1039,8 +1039,8 @@ const DIALOGUES = {
     ],
     budgetReveal: {
       en: [
-        { speaker: 'syalyanych', text: 'I got $300. And make sure it has those mud thingies on the wheels. My wife will kill me if I come home dirty again.' },
-        { speaker: 'ash', text: 'Say no more. Mud fenders are mandatory.' }
+        { speaker: "syalyanych", text: "I got $300. And make sure it has those mud thingies on the wheels. My wife will kill me if I come home dirty again." },
+        { speaker: "ash", text: "Say no more. Mud fenders are mandatory." }
       ],
       ru: [
         { speaker: 'syalyanych', text: 'Вот, держи 300 баксов. Картоху в город сдал, бабки чистые. Главное — поставь эти болотники на колеса, а то жена домой грязного не пустит!' },
@@ -1051,8 +1051,8 @@ const DIALOGUES = {
     delivery: {
       perfect: {
         en: [
-          { speaker: 'syalyanych', text: 'Oy, this is beautiful! Look at those fenders! My wife might actually let me keep it in the house!' },
-          { speaker: 'ash', text: 'Tell her it's art. Expensive, functional art.' }
+          { speaker: "syalyanych", text: "Oy, this is beautiful! Look at those fenders! My wife might actually let me keep it in the house!" },
+          { speaker: "ash", text: "Tell her it's art. Expensive, functional art." }
         ],
         ru: [
           { speaker: 'syalyanych', text: 'Ого-го! Ну и агрегат! Чистый трактор, ёлки-палки! Грязевая резина злейшая, а крылья какие — жена точно разрешит его в сени закатить! Спасибо, Эш, ты лучший мастер в округе! С меня мешок лучшей отборной бульбы!' },
@@ -1061,8 +1061,8 @@ const DIALOGUES = {
       },
       bad: {
         en: [
-          { speaker: 'syalyanych', text: 'Where are the fenders?! And this thing won't survive my driveway! Disappointed, friend.' },
-          { speaker: 'ash', text: 'We forgot the most important part. The mud monster needs his armor.' }
+          { speaker: "syalyanych", text: "Where are the fenders?! And this thing won't survive my driveway! Disappointed, friend." },
+          { speaker: "ash", text: "We forgot the most important part. The mud monster needs his armor." }
         ],
         ru: [
           { speaker: 'syalyanych', text: 'Слышь, друг... А где болотники?! И рама какая-то хлипкая, я ж её на первой же пахоте пополам сломаю! И штурмана некуда посадить... Не, картофельные бабки за такое отдавать жалко.' },
