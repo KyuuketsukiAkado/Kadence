@@ -601,8 +601,8 @@ html, body {
 
 /* #2: Sprite bigger, closer to counter */
 .character-sprite {
-  position: absolute; bottom: 0; right: 10%;
-  height: 85%; max-height: 720px; z-index: 3;
+  position: absolute; bottom: 0; right: 32%;
+  height: 110%; max-height: 936px; z-index: 3;
   object-fit: contain;
   filter: drop-shadow(0 4px 20px rgba(0,0,0,0.5));
   transition: opacity 0.3s ease;
@@ -811,7 +811,7 @@ html, body {
 .ws-bike-svg {
   width: 70%;
   height: auto;
-  opacity: 0.5;
+  opacity: 0.95;
 }
 
 /* ============================================================
@@ -1170,9 +1170,10 @@ html, body {
 .confirm-box {
   width: 531px;
   height: 212px;
-  background: transparent;
+  background: #1A1818;
   border: 1px solid #FFFFFF;
   border-radius: 8px;
+  box-shadow: 0px 10px 30px rgba(0,0,0,0.8);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1246,7 +1247,7 @@ html, body {
   flex-shrink: 0;
 }
 .store-logo { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 36px; color: #035045; }
-.store-search { display: flex; align-items: center; gap: 8px; width: 359px; height: 40px; border: 0.8px solid rgba(81,81,81,0.4); border-radius: 8px; padding: 0 12px; }
+.store-search { display: flex; align-items: center; gap: 8px; width: 359px; height: 40px; border: 0.8px solid rgba(81,81,81,0.4); border-radius: 8px; padding: 0 12px; margin-right: auto; margin-left: 32px; }
 .store-search-icon { flex-shrink: 0; }
 .store-search-input { flex: 1; border: none; outline: none; font-family: 'Inter', sans-serif; font-size: 14px; color: #3B3B3B; background: transparent; }
 .store-search-input::placeholder { color: #515151; }

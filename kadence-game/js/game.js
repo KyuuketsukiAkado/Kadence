@@ -38,22 +38,25 @@ class Game {
 
   _tryStartMusic() {
     if (this._musicStarted || !this._soundOn) return;
-    this._musicStarted = true;
-    audio.playMusic('main_menu');
-    // If blocked, retry on first interaction
-    if (audio.musicEl && audio.musicEl.paused) {
-      this._musicStarted = false;
-      const handler = () => {
-        if (!this._musicStarted && this._soundOn) {
-          this._musicStarted = true;
-          audio.playMusic('main_menu');
-        }
-        document.removeEventListener('click', handler);
-        document.removeEventListener('keydown', handler);
-      };
-      document.addEventListener('click', handler);
-      document.addEventListener('keydown', handler);
-    }
+
+    const attemptPlay = () => {
+      if (this._musicStarted || !this._soundOn) return;
+      this._musicStarted = true;
+      audio.playMusic('main_menu');
+    };
+
+    attemptPlay();
+
+    const startOnInteraction = () => {
+      if (!this._musicStarted && this._soundOn) {
+        attemptPlay();
+      }
+      document.removeEventListener('click', startOnInteraction);
+      document.removeEventListener('keydown', startOnInteraction);
+    };
+
+    document.addEventListener('click', startOnInteraction);
+    document.addEventListener('keydown', startOnInteraction);
   }
 
   bindEvents() {
@@ -570,8 +573,8 @@ class Game {
     document.getElementById('ws-balance-val').style.color = balance < 0 ? '#FF7272' : '#33FF41';
 
     const allFilled = ['frame', 'drivetrain', 'brakes', 'wheels', 'saddle'].every(c => this.state.builtBike[c]);
-    // ORDER NOW disabled if not all filled OR if over budget
-    document.getElementById('deliver-btn').disabled = !allFilled || balance < 0;
+    // ORDER NOW disabled only if not all slots are filled
+    document.getElementById('deliver-btn').disabled = !allFilled;
   }
 
   // Called when user clicks a bike part label → opens full store
@@ -901,6 +904,14 @@ class Game {
 
     // Update pagination
     const totalPages = Math.ceil(total / this._storePerPage) || 1;
+    const paginationControls = document.querySelector('.store-pagination-controls');
+    if (paginationControls) {
+      paginationControls.style.display = totalPages > 1 ? 'flex' : 'none';
+    }
+    const storePagination = document.querySelector('.store-pagination');
+    if (storePagination) {
+      storePagination.style.display = totalPages > 1 || visible.length < total ? 'flex' : 'none';
+    }
     document.querySelectorAll('.store-page-btn').forEach(btn => {
       const p = btn.dataset.page;
       if (p === 'prev' || p === 'next') return;
@@ -980,6 +991,16 @@ class Game {
         else if (pct >= 0.5) score = 3;
         else if (pct >= 0.3) score = 2;
         else score = 1;
+      }
+
+      // Explicit penalty for exceeding budget (can go over budget, but negatively impacts rating)
+      if (this.state.revealedStats.budget && totalCost > this.state.revealedStats.budget) {
+        const excessRatio = (totalCost - this.state.revealedStats.budget) / this.state.revealedStats.budget;
+        if (excessRatio > 0.2) {
+          score = Math.max(1, score - 2); // Heavy penalty for going way over budget
+        } else {
+          score = Math.max(1, score - 1); // Standard -1 star penalty
+        }
       }
     }
 
