@@ -37,26 +37,18 @@ class Game {
   }
 
   _tryStartMusic() {
-    if (this._musicStarted || !this._soundOn) return;
-
-    const attemptPlay = () => {
-      if (this._musicStarted || !this._soundOn) return;
-      this._musicStarted = true;
+    if (this._soundOn) {
       audio.playMusic('main_menu');
-    };
-
-    attemptPlay();
-
-    const startOnInteraction = () => {
-      if (!this._musicStarted && this._soundOn) {
-        attemptPlay();
+    }
+    const handler = () => {
+      if (this._soundOn) {
+        audio.playMusic('main_menu');
       }
-      document.removeEventListener('click', startOnInteraction);
-      document.removeEventListener('keydown', startOnInteraction);
+      document.removeEventListener('click', handler);
+      document.removeEventListener('keydown', handler);
     };
-
-    document.addEventListener('click', startOnInteraction);
-    document.addEventListener('keydown', startOnInteraction);
+    document.addEventListener('click', handler);
+    document.addEventListener('keydown', handler);
   }
 
   bindEvents() {
@@ -116,7 +108,13 @@ class Game {
     document.getElementById('language-select').addEventListener('change', (e) => {
       this.state.lang = e.target.value;
       this.applyLanguage();
-      if (this.state.phase === 'workshop') this.renderWorkshop();
+      if (this.state.phase === 'workshop') {
+        this.renderWorkshop();
+      } else if (this.state.phase === 'dialogue') {
+        this.renderDialogueStep();
+      } else if (this.state.phase === 'result' && this.state.lastResult) {
+        this.showResult(this.state.lastResult.score, this.state.lastResult.earnings, this.state.lastResult.failMessage);
+      }
     });
 
     // Deliver button
@@ -1004,8 +1002,10 @@ class Game {
       // Explicit penalty for exceeding budget (can go over budget, but negatively impacts rating)
       if (this.state.revealedStats.budget && totalCost > this.state.revealedStats.budget) {
         const excessRatio = (totalCost - this.state.revealedStats.budget) / this.state.revealedStats.budget;
-        if (excessRatio > 0.2) {
-          score = Math.max(1, score - 2); // Heavy penalty for going way over budget
+        if (excessRatio > 0.3) {
+          score = 1; // 1 star for heavily exceeding the budget (e.g. over 30%)
+        } else if (excessRatio > 0.1) {
+          score = Math.max(1, score - 2); // -2 stars penalty
         } else {
           score = Math.max(1, score - 1); // Standard -1 star penalty
         }
@@ -1024,6 +1024,7 @@ class Game {
 
   showResult(score, earnings, failMessage) {
     this.state.phase = 'result';
+    this.state.lastResult = { score, earnings, failMessage };
     this.showScreen('result-screen');
 
     const lang = this.state.lang;
@@ -1081,6 +1082,8 @@ class Game {
   endGame() {
     this.state.phase = 'end';
     this.stopPlaytime();
+    // Clear autosave so Continue button is hidden after game completion
+    localStorage.removeItem('kadence_autosave');
     this.showScreen('end-screen');
     audio.playMusic('end');
 
