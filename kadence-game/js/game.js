@@ -37,23 +37,18 @@ class Game {
   }
 
   _tryStartMusic() {
-    if (this._musicStarted || !this._soundOn) return;
-    this._musicStarted = true;
-    audio.playMusic('main_menu');
-    // If blocked, retry on first interaction
-    if (audio.musicEl && audio.musicEl.paused) {
-      this._musicStarted = false;
-      const handler = () => {
-        if (!this._musicStarted && this._soundOn) {
-          this._musicStarted = true;
-          audio.playMusic('main_menu');
-        }
-        document.removeEventListener('click', handler);
-        document.removeEventListener('keydown', handler);
-      };
-      document.addEventListener('click', handler);
-      document.addEventListener('keydown', handler);
+    if (this._soundOn) {
+      audio.playMusic('main_menu');
     }
+    const handler = () => {
+      if (this._soundOn) {
+        audio.playMusic('main_menu');
+      }
+      document.removeEventListener('click', handler);
+      document.removeEventListener('keydown', handler);
+    };
+    document.addEventListener('click', handler);
+    document.addEventListener('keydown', handler);
   }
 
   bindEvents() {
@@ -73,7 +68,10 @@ class Game {
 
     // Pause buttons
     document.getElementById('pause-btn').addEventListener('click', (e) => { e.stopPropagation(); this.showPause(); });
-    document.getElementById('workshop-pause-btn').addEventListener('click', (e) => { e.stopPropagation(); this.showPause(); });
+    const wsPauseBtn = document.getElementById('workshop-pause-btn');
+    if (wsPauseBtn) {
+      wsPauseBtn.addEventListener('click', (e) => { e.stopPropagation(); this.showPause(); });
+    }
 
     // Sound toggle button (main menu)
     document.getElementById('sound-toggle').addEventListener('click', (e) => {
@@ -110,7 +108,13 @@ class Game {
     document.getElementById('language-select').addEventListener('change', (e) => {
       this.state.lang = e.target.value;
       this.applyLanguage();
-      if (this.state.phase === 'workshop') this.renderWorkshop();
+      if (this.state.phase === 'workshop') {
+        this.renderWorkshop();
+      } else if (this.state.phase === 'dialogue') {
+        this.renderDialogueStep();
+      } else if (this.state.phase === 'result' && this.state.lastResult) {
+        this.showResult(this.state.lastResult.score, this.state.lastResult.earnings, this.state.lastResult.failMessage);
+      }
     });
 
     // Deliver button
@@ -294,6 +298,9 @@ class Game {
     const budgetStep = step - afterIntroAndChoices;
     const budgetLines = dialogue.budgetReveal[lang];
     if (budgetStep < budgetLines.length) {
+      if (budgetStep === 0 && dialogue.budgetReveal.reveal) {
+        this.applyReveal(dialogue.budgetReveal.reveal);
+      }
       const line = budgetLines[budgetStep];
       if (line.reveal) this.applyReveal(line.reveal);
       this.showDialogueLine(line);
@@ -531,7 +538,8 @@ class Game {
       const itemId = this.state.builtBike[cat];
       if (itemId) {
         const item = ALL_ITEMS.find(i => i.id === itemId);
-        el.textContent = item ? `[${item.name}]` : '[Select part]';
+        const name = (this.state.lang === 'ru' && item && item.nameRu) ? item.nameRu : (item ? item.name : '');
+        el.textContent = item ? `[${name}]` : '[Select part]';
       } else {
         el.textContent = '[Select part]';
       }
@@ -564,8 +572,8 @@ class Game {
     document.getElementById('ws-balance-val').style.color = balance < 0 ? '#FF7272' : '#33FF41';
 
     const allFilled = ['frame', 'drivetrain', 'brakes', 'wheels', 'saddle'].every(c => this.state.builtBike[c]);
-    // ORDER NOW disabled if not all filled OR if over budget
-    document.getElementById('deliver-btn').disabled = !allFilled || balance < 0;
+    // ORDER NOW disabled only if not all slots are filled
+    document.getElementById('deliver-btn').disabled = !allFilled;
   }
 
   // Called when user clicks a bike part label → opens full store
@@ -574,7 +582,7 @@ class Game {
     // Map bike category to store filter category
     const catToFilter = { frame: 'frames', drivetrain: 'drivetrain', brakes: 'drivetrain', wheels: 'wheels', saddle: 'accessories' };
     const filterCat = catToFilter[category] || null;
-    this.openStore(filterCat);
+    this.openStore(filterCat, category);
   }
 
   _closeShop() {
@@ -610,6 +618,7 @@ class Game {
     items.forEach(item => {
       const isEquipped = this.state.builtBike[category] === item.id;
       const brand = brandMap[item.name] || 'GENERIC';
+      const displayName = (this.state.lang === 'ru' && item.nameRu) ? item.nameRu : item.name;
 
       const statsHtml = ['speed', 'comfort', 'durability', 'style'].map(s => {
         const v = item[s]; const cls = v > 0 ? 'positive' : v < 0 ? 'negative' : 'zero';
@@ -620,7 +629,7 @@ class Game {
       card.className = 'ws-shop-item' + (isEquipped ? ' equipped' : '');
       card.innerHTML = `
         <div class="ws-shop-item-brand">${brand}</div>
-        <div class="ws-shop-item-name">${item.name}</div>
+        <div class="ws-shop-item-name">${displayName}</div>
         <div class="ws-shop-item-desc">${item.desc[this.state.lang]}</div>
         <div class="ws-shop-item-bottom">
           <div class="ws-shop-item-stats">${statsHtml}</div>
@@ -656,17 +665,27 @@ class Game {
   // ============================================================
   // BIKESUPPLY STORE — Full e-commerce with filters
   // ============================================================
-  openStore(preselectedCategory) {
+  openStore(preselectedCategory, subCategory) {
     this._storeFilters = {
       category: preselectedCategory ? [preselectedCategory] : [],
+      subCategory: subCategory || null,
       priceMax: 500,
       stats: [],
       brands: [],
       search: ''
     };
     this._storePage = 1;
-    this._storePerPage = 6;
+    this._storePerPage = 100;
     this._storeSort = 'featured';
+
+    // Reset DOM elements of the store
+    document.querySelectorAll('.store-filters input[type="checkbox"]').forEach(cb => cb.checked = false);
+    const searchInput = document.getElementById('store-search');
+    if (searchInput) searchInput.value = '';
+    const priceSlider = document.getElementById('filter-price-slider');
+    if (priceSlider) priceSlider.value = 500;
+    const priceMaxLabel = document.getElementById('filter-price-max');
+    if (priceMaxLabel) priceMaxLabel.textContent = '500';
 
     this.showScreen('store-screen');
     this._renderStore();
@@ -696,6 +715,7 @@ class Game {
     document.querySelectorAll('[data-cat-filter]').forEach(cb => {
       if (preselectedCategory && cb.dataset.catFilter === preselectedCategory) cb.checked = true;
       cb.onchange = () => {
+        this._storeFilters.subCategory = null;
         this._storeFilters.category = [...document.querySelectorAll('[data-cat-filter]:checked')].map(c => c.dataset.catFilter);
         this._storePage = 1;
         this._renderStore();
@@ -722,7 +742,7 @@ class Game {
       document.querySelectorAll('.store-filters input[type="checkbox"]').forEach(cb => cb.checked = false);
       document.getElementById('filter-price-slider').value = 500;
       document.getElementById('filter-price-max').textContent = '500';
-      this._storeFilters = { category: [], priceMax: 500, stats: [], brands: [], search: '' };
+      this._storeFilters = { category: [], subCategory: null, priceMax: 500, stats: [], brands: [], search: '' };
       this._storePage = 1;
       this._renderStore();
     };
@@ -784,11 +804,20 @@ class Game {
         return f.category.includes(mapped);
       });
     }
+    // Sub-category filter (e.g. brakes vs drivetrain) when clicking specifically from workshop labels
+    if (f.subCategory) {
+      items = items.filter(item => item.category === f.subCategory);
+    }
     // Price filter
     items = items.filter(item => item.cost <= f.priceMax);
     // Search
     if (f.search) {
-      items = items.filter(item => item.name.toLowerCase().includes(f.search) || item.desc.en.toLowerCase().includes(f.search));
+      items = items.filter(item => 
+        item.name.toLowerCase().includes(f.search) || 
+        (item.nameRu && item.nameRu.toLowerCase().includes(f.search)) || 
+        item.desc.en.toLowerCase().includes(f.search) || 
+        (item.desc.ru && item.desc.ru.toLowerCase().includes(f.search))
+      );
     }
     // Stat filter
     if (f.stats.length > 0) {
@@ -846,6 +875,7 @@ class Game {
       const brand = brandMap[item.name] || 'GENERIC';
       const isEquipped = Object.values(this.state.builtBike).includes(item.id);
       const tags = item.tags.slice(0, 2);
+      const displayName = (this.state.lang === 'ru' && item.nameRu) ? item.nameRu : item.name;
 
       const card = document.createElement('div');
       card.className = 'store-card';
@@ -857,7 +887,7 @@ class Game {
         </div>
         <div class="store-card-body">
           <div class="store-card-tags">${tags.map(t => `<span class="store-card-tag">${t}</span>`).join('')}</div>
-          <div class="store-card-name">${item.name}</div>
+          <div class="store-card-name">${displayName}</div>
           <div class="store-card-desc">${item.desc[this.state.lang]}</div>
           <div class="store-card-bottom">
             <span class="store-card-price">$${item.cost}.00</span>
@@ -880,6 +910,14 @@ class Game {
 
     // Update pagination
     const totalPages = Math.ceil(total / this._storePerPage) || 1;
+    const paginationControls = document.querySelector('.store-pagination-controls');
+    if (paginationControls) {
+      paginationControls.style.display = totalPages > 1 ? 'flex' : 'none';
+    }
+    const storePagination = document.querySelector('.store-pagination');
+    if (storePagination) {
+      storePagination.style.display = totalPages > 1 || visible.length < total ? 'flex' : 'none';
+    }
     document.querySelectorAll('.store-page-btn').forEach(btn => {
       const p = btn.dataset.page;
       if (p === 'prev' || p === 'next') return;
@@ -960,6 +998,18 @@ class Game {
         else if (pct >= 0.3) score = 2;
         else score = 1;
       }
+
+      // Explicit penalty for exceeding budget (can go over budget, but negatively impacts rating)
+      if (this.state.revealedStats.budget && totalCost > this.state.revealedStats.budget) {
+        const excessRatio = (totalCost - this.state.revealedStats.budget) / this.state.revealedStats.budget;
+        if (excessRatio > 0.3) {
+          score = 1; // 1 star for heavily exceeding the budget (e.g. over 30%)
+        } else if (excessRatio > 0.1) {
+          score = Math.max(1, score - 2); // -2 stars penalty
+        } else {
+          score = Math.max(1, score - 1); // Standard -1 star penalty
+        }
+      }
     }
 
     const baseEarnings = Math.round(totalCost * 0.3);
@@ -974,6 +1024,7 @@ class Game {
 
   showResult(score, earnings, failMessage) {
     this.state.phase = 'result';
+    this.state.lastResult = { score, earnings, failMessage };
     this.showScreen('result-screen');
 
     const lang = this.state.lang;
@@ -1031,6 +1082,8 @@ class Game {
   endGame() {
     this.state.phase = 'end';
     this.stopPlaytime();
+    // Clear autosave so Continue button is hidden after game completion
+    localStorage.removeItem('kadence_autosave');
     this.showScreen('end-screen');
     audio.playMusic('end');
 
@@ -1040,11 +1093,16 @@ class Game {
     const h = Math.floor(this.state.playtimeSeconds / 3600);
     const m = Math.floor((this.state.playtimeSeconds % 3600) / 60);
 
+    const goodbyeText = lang === 'ru' ? 
+      `<div class="end-goodbye">🐾 Огромное спасибо за то, что сыграли в прототип Kadence! Эш передает, что ты чертовски хороший механик, а колени наших любимых клиентов спасены от боли раз и навсегда. Крути педали навстречу солнцу, не забывай про шлем, береги свои суставы и до встречи на новых велодорожках! — Команда Ханны и LemiTZ 🚲❤️</div>` :
+      `<div class="end-goodbye">🐾 Thank you so much for playing the Kadence demo! Ash says you're an incredibly fine mechanic, and our clients' knees are forever grateful. Keep pedaling towards the sun, remember to wear a helmet, take care of your joints, and see you on the trails! — Hanna & LemiTZ 🚲❤️</div>`;
+
     statsDiv.innerHTML = `
       <div class="end-stat-row"><span class="end-stat-label">Clients Served</span><span class="end-stat-value">${this.state.clientsServed} / ${CLIENTS.length}</span></div>
       <div class="end-stat-row"><span class="end-stat-label">Average Rating</span><span class="end-stat-value">⭐ ${avgRating}</span></div>
       <div class="end-stat-row"><span class="end-stat-label">Total Earnings</span><span class="end-stat-value">$${this.state.bank}</span></div>
       <div class="end-stat-row"><span class="end-stat-label">Playtime</span><span class="end-stat-value">${String(h).padStart(2,'0')}h ${String(m).padStart(2,'0')}m</span></div>
+      ${goodbyeText}
     `;
   }
 

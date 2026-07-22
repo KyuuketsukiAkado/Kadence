@@ -157,14 +157,12 @@ html, body {
 
 /* Title: Space Grotesk Medium 74px #FFFFFF, X=853 Y=84 */
 .pause-title {
-  position: absolute;
-  top: 84px;
-  left: 853px;
   font-family: var(--font-display);
   font-weight: 500;
   font-size: 74px;
   color: #FFFFFF;
   white-space: nowrap;
+  margin-bottom: 40px;
 }
 
 /* Button container: vertical, gap 24px */
@@ -297,8 +295,10 @@ html, body {
   font-weight: 400;
   font-size: 28px;
   color: #FFFFFF;
-  min-width: 50px;
-  text-align: left;
+  width: 90px;
+  min-width: 90px;
+  flex-shrink: 0;
+  text-align: right;
 }
 
 /* Select wrapper */
@@ -597,12 +597,15 @@ html, body {
    GAME SCREEN — #5 no client note, #6 sprite right, #15 no darken
    ============================================================ */
 #game-screen { position: relative; }
-#game-screen .bg-layer { background-image: url('../assets/art/background_clean.png'); }
+#game-screen .bg-layer { background-image: url('../assets/art/background_clean.png'); background-position: center bottom; }
 
 /* #2: Sprite bigger, closer to counter */
 .character-sprite {
-  position: absolute; bottom: 0; right: 10%;
-  height: 85%; max-height: 720px; z-index: 3;
+  position: absolute; bottom: 0; right: 22%;
+  height: 85vh;
+  min-height: 700px;
+  max-height: 1200px;
+  z-index: 3;
   object-fit: contain;
   filter: drop-shadow(0 4px 20px rgba(0,0,0,0.5));
   transition: opacity 0.3s ease;
@@ -629,15 +632,15 @@ html, body {
 
 /* Dialogue box */
 .dialogue-container {
-  position: absolute; bottom: 30px; left: 5%; width: 60%; z-index: 10;
+  position: absolute; bottom: 0; left: 0; width: 100%; z-index: 10;
 }
 .dialogue-box {
-  background: rgba(0,0,0,0.7); backdrop-filter: blur(16px);
-  border: 1px solid rgba(255,255,255,0.3); border-radius: var(--radius-md);
-  padding: 24px 32px; min-height: 120px; cursor: pointer;
+  background: rgba(10,10,10,0.85); backdrop-filter: blur(16px);
+  border: none; border-top: 2px solid rgba(255,255,255,0.2); border-radius: 0;
+  padding: 32px 10%; height: 220px; box-sizing: border-box; cursor: pointer;
 }
 .dialogue-speaker {
-  font-family: var(--font-display); font-weight: 600; font-size: 18px;
+  font-family: var(--font-display); font-weight: 600; font-size: calc(18px + 0.3vw);
   margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;
 }
 .dialogue-speaker.narrator { color: var(--text-muted); font-style: italic; text-transform: none; }
@@ -649,11 +652,11 @@ html, body {
 .dialogue-speaker.ewa { color: #DDA0DD; }
 .dialogue-speaker.syalyanych { color: #D2B48C; }
 .dialogue-text {
-  font-family: var(--font-body); font-weight: 400; font-size: 22px;
-  line-height: 34px; color: var(--text-primary);
+  font-family: var(--font-body); font-weight: 400; font-size: calc(20px + 0.4vw);
+  line-height: 1.6; color: var(--text-primary);
 }
 .dialogue-continue {
-  font-family: var(--font-body); font-weight: 400; font-size: 14px;
+  font-family: var(--font-body); font-weight: 400; font-size: calc(12px + 0.1vw);
   color: var(--text-muted); text-align: right; margin-top: 10px;
   animation: blink 1.5s infinite;
 }
@@ -811,7 +814,7 @@ html, body {
 .ws-bike-svg {
   width: 70%;
   height: auto;
-  opacity: 0.5;
+  opacity: 0.95;
 }
 
 /* ============================================================
@@ -842,7 +845,9 @@ html, body {
 
 /* Label text */
 .ws-label-text {
-  white-space: nowrap;
+  white-space: normal;
+  max-width: 180px;
+  word-wrap: break-word;
 }
 .ws-label-cat {
   font-family: var(--font-body);
@@ -859,24 +864,24 @@ html, body {
 
 /* Label positions (hand-placed relative to bike illustration) */
 .ws-label-frame {
-  top: 160px;
-  left: 180px;
+  top: 150px;
+  left: 40px;
 }
 .ws-label-drivetrain {
-  bottom: 120px;
-  left: 80px;
+  bottom: 50px;
+  left: 40px;
 }
 .ws-label-brakes {
-  top: 200px;
-  right: 180px;
+  top: 80px;
+  right: 40px;
 }
 .ws-label-wheels {
-  bottom: 80px;
-  right: 80px;
+  bottom: 50px;
+  right: 40px;
 }
 .ws-label-saddle {
-  top: 80px;
-  left: 250px;
+  top: 40px;
+  left: 150px;
 }
 
 /* ============================================================
@@ -1153,6 +1158,18 @@ html, body {
 .end-stat-row { display: flex; justify-content: space-between; font-family: var(--font-body); font-size: 22px; }
 .end-stat-label { color: var(--text-secondary); }
 .end-stat-value { font-weight: 700; color: var(--accent-yellow); }
+.end-goodbye {
+  margin-top: 30px;
+  padding: 20px;
+  background: rgba(0, 147, 126, 0.1);
+  border-left: 4px solid var(--accent-cyan);
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-primary);
+  text-align: left;
+}
 
 /* ============================================================
    SUBMIT POPUP — Pixel-perfect Figma handoff
@@ -1170,9 +1187,10 @@ html, body {
 .confirm-box {
   width: 531px;
   height: 212px;
-  background: transparent;
+  background: #1A1818;
   border: 1px solid #FFFFFF;
   border-radius: 8px;
+  box-shadow: 0px 10px 30px rgba(0,0,0,0.8);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1246,7 +1264,7 @@ html, body {
   flex-shrink: 0;
 }
 .store-logo { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 36px; color: #035045; }
-.store-search { display: flex; align-items: center; gap: 8px; width: 359px; height: 40px; border: 0.8px solid rgba(81,81,81,0.4); border-radius: 8px; padding: 0 12px; }
+.store-search { display: flex; align-items: center; gap: 8px; width: 359px; height: 40px; border: 0.8px solid rgba(81,81,81,0.4); border-radius: 8px; padding: 0 12px; margin-right: auto; margin-left: 32px; }
 .store-search-icon { flex-shrink: 0; }
 .store-search-input { flex: 1; border: none; outline: none; font-family: 'Inter', sans-serif; font-size: 14px; color: #3B3B3B; background: transparent; }
 .store-search-input::placeholder { color: #515151; }
@@ -1351,7 +1369,7 @@ html, body {
 .store-card-add.equipped-btn { background: #999; cursor: default; }
 
 /* PAGINATION */
-.store-pagination { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+.store-pagination { display: none !important; }
 .store-pagination-line { width: 302px; height: 0; border-top: 1px solid #515151; }
 .store-pagination-controls { display: flex; gap: 7px; align-items: center; }
 .store-page-btn {
